@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jbox/screens/loginscreen.dart/loginscreen.dart';
+import 'package:jbox/screens/loginscreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,8 +13,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            GoRouter.of(context).goNamed(LoginScreen.routeName,
-                pathParameters: {'test': 'kosmas'});
+            GoRouter.of(context).goNamed(LoginScreen.routeName);
           },
           child: Text('Log in'),
         ),
