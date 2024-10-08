@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1055541672882",
+    "project_id": "jboxserver",
+    "storage_bucket": "jboxserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055541672882:android:0ca0de059e75af1a1542ab",
+        "android_client_info": {
+          "package_name": "gr.techzombie.jbox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNqBMaj7LB8IpLyYayjLfPAC3B0OcmBjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
