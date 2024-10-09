@@ -61,7 +61,7 @@ class LargeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -99,7 +99,12 @@ class LargeScreen extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                  child: Image.asset('assets/images/image.png'),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      HomeScreenConstants.imagePath,
+                    ),
+                  ),
                 ),
               ],
             ),

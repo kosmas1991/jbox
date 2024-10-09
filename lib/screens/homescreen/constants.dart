@@ -5,6 +5,7 @@ class HomeScreenConstants {
   static const mainText = 'Αναβάθμισε την επιχείρηση σου με το JBox';
   static const menu1Text = 'Τιμές';
   static const logInText = 'Είσοδος';
+  static const imagePath = 'assets/images/image.jpg';
   static const buttonText = 'Μάθε περισσότερα';
   static final richTextSection = RichText(
     text: const TextSpan(
@@ -14,7 +15,7 @@ class HomeScreenConstants {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
         ),
         TextSpan(
-            text: 'την μουσική ',
+            text: 'τη μουσική ',
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
         TextSpan(
           text: 'που θα ακούσουν.',

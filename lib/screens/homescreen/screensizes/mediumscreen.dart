@@ -59,10 +59,13 @@ class MediumScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset(
-                  'assets/images/image_3.png',
-                  height: MediaQuery.of(context).size.height /
-                      2, //half of screen height
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.asset(
+                    HomeScreenConstants.imagePath,
+                    height: MediaQuery.of(context).size.height /
+                        2, //half of screen height
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

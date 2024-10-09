@@ -59,7 +59,9 @@ class SmallScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset('assets/images/image_3.png'),
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(HomeScreenConstants.imagePath)),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
