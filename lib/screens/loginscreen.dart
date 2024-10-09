@@ -1,6 +1,6 @@
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jbox/screens/adminscreen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen();
@@ -11,21 +11,26 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Login page '),
-            ElevatedButton(
-                onPressed: () {
-                  GoRouter.of(context).goNamed(
-                    AdminScreen.routeName,
-                    pathParameters: {'user': 'kosmas'},
-                    // queryParameters: {'variable2': 'var2'},
-                  );
-                },
-                child: Text('Go to admin screen'))
+        child: SignInScreen(
+          providers: [EmailAuthProvider()],
+          actions: [
+            AuthStateChangeAction<SignedIn>(
+              (context, state) {
+                GoRouter.of(context).goNamed('/admin');
+              },
+            )
           ],
         ),
+        // Text('Login page '),
+        // ElevatedButton(
+        //     onPressed: () {
+        //       GoRouter.of(context).goNamed(
+        //         AdminScreen.routeName,
+        //         pathParameters: {'user': 'kosmas'},
+        //         // queryParameters: {'variable2': 'var2'},
+        //       );
+        //     },
+        //     child: Text('Go to admin screen')),
       ),
     );
   }

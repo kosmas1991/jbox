@@ -20,10 +20,8 @@ class GoRouterProvider {
       ),
       GoRoute(
         name: AdminScreen.routeName,
-        path: AdminScreen.routeName + '/:user',
-        builder: (context, state) => AdminScreen(
-          user: state.pathParameters['user'] ?? '',
-        ),
+        path: AdminScreen.routeName,
+        builder: (context, state) => AdminScreen(),
       ),
       GoRoute(
         name: DisplayScreen.routeName,
