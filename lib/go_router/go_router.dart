@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:jbox/screens/adminscreen.dart';
 import 'package:jbox/screens/displayscreen.dart';
-import 'package:jbox/screens/homescreen.dart';
+import 'package:jbox/screens/homescreen/homescreen.dart';
 import 'package:jbox/screens/loginscreen.dart';
 
 class GoRouterProvider {
