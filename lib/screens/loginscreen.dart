@@ -21,16 +21,6 @@ class LoginScreen extends StatelessWidget {
             )
           ],
         ),
-        // Text('Login page '),
-        // ElevatedButton(
-        //     onPressed: () {
-        //       GoRouter.of(context).goNamed(
-        //         AdminScreen.routeName,
-        //         pathParameters: {'user': 'kosmas'},
-        //         // queryParameters: {'variable2': 'var2'},
-        //       );
-        //     },
-        //     child: Text('Go to admin screen')),
       ),
     );
   }
