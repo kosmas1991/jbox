@@ -63,7 +63,7 @@ class MediumScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
                     HomeScreenConstants.imagePath,
-                    height: MediaQuery.of(context).size.height /
+                    height: MediaQuery.sizeOf(context).height /
                         2, //half of screen height
                   ),
                 ),

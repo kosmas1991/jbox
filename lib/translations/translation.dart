@@ -1,5 +1,7 @@
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 
+//! in case everything needs to be translated, take for example (https://github.com/firebase/FirebaseUI-Flutter/blob/main/packages/firebase_ui_localizations/lib/src/lang/en.dart), copy paste and translate all the fields
+
 class LabelOverrides extends EnLocalizations {
   const LabelOverrides();
 
