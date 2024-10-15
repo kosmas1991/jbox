@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jbox/screens/homescreen/constants.dart';
-import 'package:jbox/screens/loginscreen.dart';
+import 'package:jbox/screens/loginscreen/loginscreen.dart';
 
 class MediumScreen extends StatelessWidget {
   const MediumScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jbox/screens/displayscreen.dart';
+import 'package:jbox/screens/displayscreen/displayscreen.dart';
 
 class AdminScreen extends StatelessWidget {
   final String user;
@@ -21,8 +21,8 @@ class AdminScreen extends StatelessWidget {
             Text('data received: ${user} '),
             ElevatedButton(
                 onPressed: () {
-                  GoRouter.of(context)
-                      .goNamed(DisplayScreen.routeName, queryParameters: {'terminal':'5thAvenue'});
+                  GoRouter.of(context).goNamed(DisplayScreen.routeName,
+                      queryParameters: {'terminal': '5thAvenue'});
                 },
                 child: Text('go to display 5thAvenue'))
           ],

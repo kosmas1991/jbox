@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:jbox/firebase_options.dart';
+import 'package:jbox/firebaseconfig/firebase_options.dart';
 import 'package:jbox/go_router/go_router.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:jbox/translations/translation.dart';
