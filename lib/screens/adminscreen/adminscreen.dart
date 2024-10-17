@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
+import 'package:jbox/widgets%20(global)/widgets.dart';
+
+//TODO implement force fill user data (email, name, photo etc)
 
 class AdminScreen extends StatelessWidget {
   const AdminScreen({
@@ -27,18 +30,18 @@ class AdminScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('data received:  '),
-              ElevatedButton(
-                onPressed: () {
+              MyGlobalButton(
+                fun: () {
                   GoRouter.of(context).goNamed(DisplayScreen.routeName,
                       queryParameters: {'terminal': '5thAvenue'});
                 },
-                child: Text('go to display 5thAvenue'),
+                buttonText: 'go to display',
               ),
-              ElevatedButton(
-                onPressed: () {
+              MyGlobalButton(
+                fun: () {
                   FirebaseAuth.instance.signOut();
                 },
-                child: Text('Log out'),
+                buttonText: 'Log out',
               ),
             ],
           ),

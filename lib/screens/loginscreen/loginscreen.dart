@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
+import 'package:jbox/main.dart';
+import 'package:jbox/screens/adminscreen/adminscreen.dart';
+import 'package:jbox/screens/homescreen/homescreen.dart';
 import 'package:jbox/widgets%20(global)/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -16,18 +19,63 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: isUserLoggedIn
+            //! user logged in
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/avatar.png'),
-                  Text('Already signed in'),
-                  MyGlobalButton(),
+                  Image.asset(
+                    'assets/images/avatar.png',
+                    width: 200,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Ήδη συνδεδεμένος χρήστης',
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  MyGlobalButton(
+                    buttonText: 'Σελίδα διαχείρισης',
+                    fun: () {
+                      GoRouter.of(context).goNamed(AdminScreen.routeName);
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MyGlobalButton(
+                    buttonText: 'Αποσύνδεση',
+                    fun: () {
+                      auth.signOut();
+                    },
+                  ),
                 ],
               )
+            //! user logged out
             : SignInScreen(
-                footerBuilder: (context, action) =>
-                    Image.asset('assets/images/mainlogo.png'),
+                footerBuilder: (context, action) => Container(
+                  height: 300,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Image.asset('assets/images/mainlogo.png'),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MyGlobalButton(
+                          buttonText: 'Αρχική',
+                          fun: () {
+                            GoRouter.of(context).goNamed(HomeScreen.routeName);
+                          }),
+                    ],
+                  ),
+                ),
                 sideBuilder: (context, constraints) =>
                     Image.asset('assets/images/image.jpg'),
                 providers: [EmailAuthProvider()],

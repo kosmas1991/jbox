@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,11 @@ import 'package:jbox/firebaseconfig/firebase_options.dart';
 import 'package:jbox/go_router/go_router.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:jbox/translations/translation.dart';
+
+//? G L O B A L S
+var auth = FirebaseAuth.instance;
+
+//TODO implement at home screens (small, medium & large) when user logged in show go to admin page (not Είσοδος)
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
