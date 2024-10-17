@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         FirebaseUILocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'JBox',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
