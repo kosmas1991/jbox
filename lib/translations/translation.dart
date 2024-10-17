@@ -63,4 +63,7 @@ class LabelOverrides extends EnLocalizations {
   @override
   String get confirmPasswordDoesNotMatchErrorText =>
       'Οι κωδικοί δεν ταιριάζουν';
+
+  @override
+  String get isNotAValidEmailErrorText => 'Συμπλήρωσε ένα έγκυρο email';
 }

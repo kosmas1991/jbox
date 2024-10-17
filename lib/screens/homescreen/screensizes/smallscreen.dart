@@ -14,44 +14,43 @@ class SmallScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
                 left: 20.0, top: 24.0, right: 20.0, bottom: 40.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  HomeScreenConstants.siteName,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
+            child: Container(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    'assets/images/mainlogo.png',
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(18.0),
-                      child: Text(
-                        HomeScreenConstants.menu1Text,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(18.0),
+                        child: Text(
+                          HomeScreenConstants.menu1Text,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
-                    ElevatedButton(
-                      style: HomeScreenConstants.buttonStyleSmall,
-                      onPressed: () {
-                        GoRouter.of(context).goNamed(LoginScreen.routeName);
-                      },
-                      child: const Text(
-                        HomeScreenConstants.logInText,
-                        style: TextStyle(
-                          fontSize: 14,
+                      ElevatedButton(
+                        style: HomeScreenConstants.buttonStyleSmall,
+                        onPressed: () {
+                          GoRouter.of(context).goNamed(LoginScreen.routeName);
+                        },
+                        child: const Text(
+                          HomeScreenConstants.logInText,
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           Padding(
