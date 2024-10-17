@@ -1,8 +1,13 @@
 part of 'user_bloc.dart';
 
 class UserEvent extends Equatable {
-  const UserEvent();
+  final User? user;
+
+  UserEvent({this.user});
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [user];
+
+  @override
+  bool get stringify => true;
 }

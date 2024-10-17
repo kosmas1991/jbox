@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/firebaseconfig/firebase_options.dart';
 import 'package:jbox/go_router/go_router.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
@@ -17,24 +19,35 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final snackbarKey = GlobalKey<ScaffoldMessengerState>();
+
   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      localizationsDelegates: [
-        FirebaseUILocalizations.withDefaultOverrides(const LabelOverrides()),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        FirebaseUILocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          lazy: false,
+          create: (context) => UserBloc(),
+        ),
       ],
-      debugShowCheckedModeBanner: false,
-      title: 'JBox',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      child: MaterialApp.router(
+        scaffoldMessengerKey: snackbarKey,
+        localizationsDelegates: [
+          FirebaseUILocalizations.withDefaultOverrides(const LabelOverrides()),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          FirebaseUILocalizations.delegate,
+        ],
+        debugShowCheckedModeBanner: false,
+        title: 'JBox',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        routerConfig: GoRouterProvider.router,
       ),
-      routerConfig: GoRouterProvider.router,
     );
   }
 }
