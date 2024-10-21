@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
+import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/screens/adminscreen/adminscreen.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
-import 'package:jbox/widgets%20(global)/widgets.dart';
+import 'package:jbox/global%20widgets/myglobalbutton.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen();
@@ -64,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 40,
                       ),
-                      Image.asset('assets/images/mainlogo.png'),
+                      MainLogo(),
                       SizedBox(
                         height: 20,
                       ),

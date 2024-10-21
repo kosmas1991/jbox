@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/screens/homescreen/constants.dart';
 import 'package:jbox/screens/loginscreen/loginscreen.dart';
 
@@ -19,9 +20,7 @@ class LargeScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    'assets/images/mainlogo.png',
-                  ),
+                  MainLogo(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
