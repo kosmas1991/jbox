@@ -13,7 +13,7 @@ import 'package:jbox/translations/translation.dart';
 //? G L O B A L S
 var auth = FirebaseAuth.instance;
 
-//TODO implement at home screens (small, medium & large) when user logged in show go to admin page (not Είσοδος)
+//TODO implement when auth.currentUser has image URL... at home screens (small, medium & large) when user logged in show go to admin page (not Είσοδος)
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

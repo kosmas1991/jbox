@@ -3,7 +3,6 @@ import 'package:jbox/screens/adminscreen/adminscreen.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
 import 'package:jbox/screens/loginscreen/loginscreen.dart';
-import 'package:jbox/screens/validatescreen/validate_email.dart';
 
 class GoRouterProvider {
   static final GoRouter router = GoRouter(
@@ -30,11 +29,6 @@ class GoRouterProvider {
         builder: (context, state) => DisplayScreen(
           terminal: state.uri.queryParameters['terminal'] ?? '',
         ),
-      ),
-      GoRoute(
-        name: ValidateEmail.routeName,
-        path: ValidateEmail.routeName,
-        builder: (context, state) => ValidateEmail(),
       ),
     ],
   );
