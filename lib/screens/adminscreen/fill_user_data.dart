@@ -27,21 +27,15 @@ class FillUserData extends StatelessWidget {
               ),
               Text('Συμπλήρωσε τα παρακάτω για να συνεχίσεις'),
               SizedBox(
+                height: 30,
+              ),
+              Text('Εικόνα προφίλ (Default)'),
+              MyGlobalButton(buttonText: 'Επιλογή εικόνας', fun: () {}),
+              SizedBox(
                 height: 10,
               ),
               Text('Όνομα (username)'),
               MyTextField(textEditingController: usernameTextEditingController),
-              SizedBox(
-                height: 10,
-              ),
-              Text('Εικόνα προφίλ (Default)'),
-              MyGlobalButton(
-                  buttonText: 'Επιλογή εικόνας',
-                  fun: () {
-                    auth.currentUser?.updatePhotoURL(
-                        'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/pngwing.com.png?alt=media&token=469dc118-3465-4368-b04e-4c6cc806b3d0');
-                    // 'https://i.pravatar.cc/250?u=${context.read<UserBloc>().state.user!.email}');
-                  }),
               SizedBox(
                 height: 30,
               ),
