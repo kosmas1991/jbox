@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
@@ -19,8 +21,8 @@ class ThirdScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Image.asset(
-              'assets/images/avatar.png',
+            Image.network(
+              context.watch<UserBloc>().state.user!.photoURL!,
               width: 200,
             ),
             SizedBox(

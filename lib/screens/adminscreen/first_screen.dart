@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';
 
+//!TODO add a wallpaper upload image
+
 class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

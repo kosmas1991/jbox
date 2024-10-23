@@ -15,6 +15,9 @@ var auth = FirebaseAuth.instance;
 
 //TODO implement when auth.currentUser has image URL... at home screens (small, medium & large) when user logged in show go to admin page (not Είσοδος)
 
+//! flutter run -d chrome --web-renderer html
+//! flutter build web --web-renderer html --release
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

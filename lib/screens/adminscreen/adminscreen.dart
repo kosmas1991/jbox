@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
-import 'package:jbox/global%20widgets/mytextfield.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/responsiveness/responsive_widget.dart';
 import 'package:jbox/screens/adminscreen/drawer_button.dart';
 import 'package:jbox/screens/adminscreen/drawer_content.dart';
 import 'package:jbox/screens/adminscreen/end_drawer_content.dart';
+import 'package:jbox/screens/adminscreen/fill_user_data.dart';
 import 'package:jbox/screens/adminscreen/first_screen.dart';
 import 'package:jbox/screens/adminscreen/loggedoutadmin.dart';
 import 'package:jbox/screens/adminscreen/second_screen.dart';
@@ -30,7 +30,8 @@ class AdminScreen extends StatefulWidget {
 }
 
 class _AdminScreenState extends State<AdminScreen> {
-  TextEditingController textEditingController = TextEditingController();
+  TextEditingController usernameTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     //? checking if logged in
@@ -105,30 +106,8 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                 );
               } else {
-                return Scaffold(
-                  body: Center(
-                    child: Container(
-                      width: 400,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Συμπλήρωσε τα παρακάτω για να συνεχίσεις'),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text('Όνομα (username)'),
-                          MyTextField(
-                              textEditingController: textEditingController),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text('Όνομα (username)'),
-                          MyTextField(
-                              textEditingController: textEditingController),
-                        ],
-                      ),
-                    ),
-                  ),
+                return FillUserData(
+                  usernameTextEditingController: usernameTextEditingController,
                 );
               }
             },
@@ -141,7 +120,6 @@ class _AdminScreenState extends State<AdminScreen> {
     }
     return user.displayName != null &&
         user.email != null &&
-        user.photoURL != null &&
-        user.phoneNumber != null;
+        user.photoURL != null;
   }
 }
