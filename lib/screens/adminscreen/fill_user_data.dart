@@ -1,10 +1,14 @@
+import 'dart:typed_data';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/global%20widgets/mytextfield.dart';
 import 'package:jbox/main.dart';
 
-class FillUserData extends StatelessWidget {
+class FillUserData extends StatefulWidget {
   const FillUserData({
     super.key,
     required this.usernameTextEditingController,
@@ -12,6 +16,12 @@ class FillUserData extends StatelessWidget {
 
   final TextEditingController usernameTextEditingController;
 
+  @override
+  State<FillUserData> createState() => _FillUserDataState();
+}
+
+class _FillUserDataState extends State<FillUserData> {
+  Uint8List? _imageBytes;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,25 +40,83 @@ class FillUserData extends StatelessWidget {
                 height: 30,
               ),
               Text('Εικόνα προφίλ (Default)'),
-              MyGlobalButton(buttonText: 'Επιλογή εικόνας', fun: () {}),
+              MyGlobalButton(
+                  buttonText: 'Επιλογή εικόνας',
+                  fun: () async {
+                    await _pickImage();
+                  }),
               SizedBox(
                 height: 10,
               ),
+              _imageBytes != null
+                  ? Image.memory(
+                      _imageBytes!,
+                      height: 200,
+                      width: 200,
+                      fit: BoxFit.cover,
+                    )
+                  : Text('No image selected.'),
               Text('Όνομα (username)'),
-              MyTextField(textEditingController: usernameTextEditingController),
+              MyTextField(
+                  textEditingController: widget.usernameTextEditingController),
               SizedBox(
                 height: 30,
               ),
               MyGlobalButton(
                   buttonText: 'Αποθήκευση',
                   fun: () {
-                    auth.currentUser
-                        ?.updateDisplayName(usernameTextEditingController.text);
+                    auth.currentUser?.updateDisplayName(
+                        widget.usernameTextEditingController.text);
                   }),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      // Read image bytes asynchronously
+      final Uint8List imageBytes = await image.readAsBytes();
+
+      setState(() {
+        _imageBytes = imageBytes;
+      });
+      await uploadProfilePicture(imageBytes, auth.currentUser?.uid ?? '');
+    }
+  }
+
+  Future<void> uploadProfilePicture(
+      Uint8List? imageBytes, String userId) async {
+    if (imageBytes == null) {
+      print("No image selected");
+      return;
+    }
+
+    // Create a reference to Firebase Storage
+    FirebaseStorage storage = FirebaseStorage.instance;
+    Reference ref =
+        storage.ref().child('profile_pictures/$userId/profile_picture.jpg');
+
+    try {
+      // Upload the image
+      UploadTask uploadTask = ref.putData(imageBytes);
+      TaskSnapshot snapshot = await uploadTask;
+
+      // Get the download URL after the upload completes
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+      print('Uploaded successfully! Download URL: $downloadUrl');
+      setAsUsersProfilePic(downloadUrl);
+    } catch (e) {
+      print('Error uploading image: $e');
+    }
+  }
+
+  void setAsUsersProfilePic(String downloadUrl) async {
+    await auth.currentUser?.updatePhotoURL(downloadUrl);
   }
 }

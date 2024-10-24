@@ -21,9 +21,12 @@ class ThirdScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Image.network(
-              context.watch<UserBloc>().state.user!.photoURL!,
-              width: 200,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(500),
+              child: Image.network(
+                context.watch<UserBloc>().state.user!.photoURL!,
+                width: 200,
+              ),
             ),
             SizedBox(
               height: 10,

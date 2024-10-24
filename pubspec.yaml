@@ -47,6 +47,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   icons_launcher: ^3.0.0
+  image_picker: ^1.1.2
+  firebase_storage: ^12.3.4
 
 dev_dependencies:
   flutter_test:
