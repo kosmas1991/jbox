@@ -12,6 +12,8 @@ class UsernameField extends StatelessWidget {
     textEditingController.text =
         context.read<UserBloc>().state.user?.displayName ?? '';
     return MyTextField(
+      locked: true,
+      readOnly: true,
       textEditingController: textEditingController,
       hintText: context.watch<UserBloc>().state.user?.displayName ?? '',
     );

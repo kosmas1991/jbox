@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';
 import 'package:jbox/screens/adminscreen/widgets/username_field.dart';
 
@@ -27,6 +28,14 @@ class FirstScreen extends StatelessWidget {
               height: 10,
             ),
             UsernameField(),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Εικόνα παρασκηνίου'),
+            SizedBox(
+              height: 10,
+            ),
+            MyGlobalButton(buttonText: 'Επιλογή εικόνας', fun: () {}),
           ],
         ),
       ),

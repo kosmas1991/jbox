@@ -30,6 +30,6 @@ class FirestoreProvider {
 
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).update(userData);
-    'addmodified user to firestore with data ${userData}'.printWhite();
+    'modified user to firestore with data ${userData}'.printWhite();
   }
 }

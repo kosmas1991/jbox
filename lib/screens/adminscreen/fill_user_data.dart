@@ -155,13 +155,14 @@ class _FillUserDataState extends State<FillUserData> {
       // Get the download URL after the upload completes
       String downloadUrl = await snapshot.ref.getDownloadURL();
       print('Uploaded successfully! Download URL: $downloadUrl');
-      setAsUsersProfilePic(downloadUrl);
+      await setAsUsersProfilePic(downloadUrl);
+      await FirestoreProvider.modifyUserToFirestore(auth.currentUser!);
     } catch (e) {
       print('Error uploading image: $e');
     }
   }
 
-  void setAsUsersProfilePic(String downloadUrl) async {
+  Future<void> setAsUsersProfilePic(String downloadUrl) async {
     await auth.currentUser?.updatePhotoURL(downloadUrl);
   }
 }

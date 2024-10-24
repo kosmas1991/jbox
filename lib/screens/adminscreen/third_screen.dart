@@ -17,7 +17,7 @@ class ThirdScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Third (profile) Screen'),
+            Text(auth.currentUser?.displayName?? 'user logged off'),
             SizedBox(
               height: 10,
             ),
