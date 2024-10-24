@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
+import 'package:jbox/main.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
 
 class SecondScreen extends StatelessWidget {
@@ -23,9 +24,11 @@ class SecondScreen extends StatelessWidget {
             MyGlobalButton(
               fun: () {
                 GoRouter.of(context).goNamed(DisplayScreen.routeName,
-                    queryParameters: {'terminal': '5thAvenue'});
+                    queryParameters: {
+                      'terminal': auth.currentUser?.displayName
+                    });
               },
-              buttonText: 'go to display',
+              buttonText: 'Οθόνη προβολής',
             ),
           ],
         ),

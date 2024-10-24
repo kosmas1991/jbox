@@ -21,11 +21,21 @@ class ThirdScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(500),
+            ClipOval(
               child: Image.network(
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return CircularProgressIndicator(
+                      color: Colors.black,
+                    );
+                  }
+                },
                 context.watch<UserBloc>().state.user!.photoURL!,
                 width: 200,
+                height: 200,
+                fit: BoxFit.cover,
               ),
             ),
             SizedBox(

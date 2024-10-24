@@ -2,7 +2,10 @@ import 'dart:typed_data';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jbox/blocs/user/user_bloc.dart';
+import 'package:jbox/firestore/firestore_functios.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/global%20widgets/mytextfield.dart';
@@ -24,54 +27,97 @@ class _FillUserDataState extends State<FillUserData> {
   Uint8List? _imageBytes;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          width: 400,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MainLogo(),
-              SizedBox(
-                height: 10,
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: Container(
+              width: 450,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MainLogo(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('Συμπλήρωσε τα παρακάτω για να συνεχίσεις'),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  //?image visibility
+                  Visibility(
+                    visible: state.user?.photoURL == null,
+                    child: Column(
+                      children: [
+                        Text('Εικόνα προφίλ'),
+                        Row(
+                          children: [
+                            MyGlobalButton(
+                                buttonText: 'Επιλογή εικόνας',
+                                fun: () async {
+                                  await _pickImage();
+                                }),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            MyGlobalButton(
+                                buttonText: 'Χρήση προεπιλεγμένης',
+                                fun: () async {
+                                  await auth.currentUser?.updatePhotoURL(
+                                      //! uses profile_picture.jpg from firebase storage (JBOX logo)
+                                      'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/profile_picture.jpg?alt=media&token=955a8aff-830b-4f9f-a2fd-4dfab7d42c92');
+                                  await FirestoreProvider.modifyUserToFirestore(
+                                      auth.currentUser!);
+                                }),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        _imageBytes != null
+                            ? Image.memory(
+                                _imageBytes!,
+                                height: 200,
+                                width: 200,
+                                fit: BoxFit.cover,
+                              )
+                            : Text('No image selected.'),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  //? username visibility
+                  Visibility(
+                    visible: state.user?.displayName == null,
+                    child: Column(
+                      children: [
+                        Text('Όνομα χρήστη'),
+                        MyTextField(
+                            textEditingController:
+                                widget.usernameTextEditingController),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 30,
+                  ),
+                  MyGlobalButton(
+                      buttonText: 'Αποθήκευση',
+                      fun: () async {
+                        await auth.currentUser?.updateDisplayName(
+                            widget.usernameTextEditingController.text);
+                        await FirestoreProvider.modifyUserToFirestore(
+                            auth.currentUser!);
+                      }),
+                ],
               ),
-              Text('Συμπλήρωσε τα παρακάτω για να συνεχίσεις'),
-              SizedBox(
-                height: 30,
-              ),
-              Text('Εικόνα προφίλ (Default)'),
-              MyGlobalButton(
-                  buttonText: 'Επιλογή εικόνας',
-                  fun: () async {
-                    await _pickImage();
-                  }),
-              SizedBox(
-                height: 10,
-              ),
-              _imageBytes != null
-                  ? Image.memory(
-                      _imageBytes!,
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.cover,
-                    )
-                  : Text('No image selected.'),
-              Text('Όνομα (username)'),
-              MyTextField(
-                  textEditingController: widget.usernameTextEditingController),
-              SizedBox(
-                height: 30,
-              ),
-              MyGlobalButton(
-                  buttonText: 'Αποθήκευση',
-                  fun: () {
-                    auth.currentUser?.updateDisplayName(
-                        widget.usernameTextEditingController.text);
-                  }),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -98,7 +144,6 @@ class _FillUserDataState extends State<FillUserData> {
     }
 
     // Create a reference to Firebase Storage
-    FirebaseStorage storage = FirebaseStorage.instance;
     Reference ref =
         storage.ref().child('profile_pictures/$userId/profile_picture.jpg');
 

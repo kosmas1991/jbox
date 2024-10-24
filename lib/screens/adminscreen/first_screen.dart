@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';
+import 'package:jbox/screens/adminscreen/widgets/username_field.dart';
 
 //!TODO add a wallpaper upload image
 
@@ -18,6 +19,14 @@ class FirstScreen extends StatelessWidget {
               height: 10,
             ),
             AzuracastLinkField(),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Όνομα χρήστη'),
+            SizedBox(
+              height: 10,
+            ),
+            UsernameField(),
           ],
         ),
       ),

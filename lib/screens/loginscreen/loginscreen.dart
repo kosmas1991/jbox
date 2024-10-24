@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
+import 'package:jbox/extensions/debug_print_extension.dart';
+import 'package:jbox/extensions/printextensions.dart';
+import 'package:jbox/firestore/firestore_functios.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/go_router/go_router.dart';
+import 'package:jbox/main.dart';
 import 'package:jbox/screens/adminscreen/adminscreen.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
@@ -51,6 +55,13 @@ class LoginScreen extends StatelessWidget {
               AuthStateChangeAction<SignedIn>(
                 (context, state) {
                   GoRouterProvider.router.goNamed(AdminScreen.routeName);
+                },
+              ),
+              AuthStateChangeAction<UserCreated>(
+                (context, state) {
+                  'a new user is created with UID: ${auth.currentUser?.uid}'
+                      .printGreen();
+                  FirestoreProvider.addNewUserToFirestore(auth.currentUser!);
                 },
               )
             ],
