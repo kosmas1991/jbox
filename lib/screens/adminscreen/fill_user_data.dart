@@ -88,6 +88,8 @@ class _FillUserDataState extends State<FillUserData> {
                       ],
                     ),
                   ),
+
+                  //TODO check if username already exist at firebase
                   //? username visibility
                   Visibility(
                     visible: state.user?.displayName == null,

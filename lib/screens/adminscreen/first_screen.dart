@@ -17,7 +17,6 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  Uint8List? _imageBytes;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,10 +92,6 @@ class _FirstScreenState extends State<FirstScreen> {
     if (image != null) {
       // Read image bytes asynchronously
       final Uint8List imageBytes = await image.readAsBytes();
-
-      setState(() {
-        _imageBytes = imageBytes;
-      });
       await uploadBackgroundPicture(imageBytes, auth.currentUser?.uid ?? '');
     }
   }
@@ -121,8 +116,11 @@ class _FirstScreenState extends State<FirstScreen> {
       // Get the download URL after the upload completes
       String downloadUrl = await snapshot.ref.getDownloadURL();
       print('Uploaded successfully! Download URL: $downloadUrl');
-      await FirestoreProvider.updateUserToFirestore(
-          user: auth.currentUser!, key: 'backgroundImage', value: downloadUrl);
+      await FirestoreProvider.updateParameterToFirestore(
+          collectionName: 'parameters',
+          user: auth.currentUser!,
+          key: 'backgroundImage',
+          value: downloadUrl);
     } catch (e) {
       print('Error uploading image: $e');
     }

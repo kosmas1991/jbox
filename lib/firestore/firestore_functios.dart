@@ -37,18 +37,21 @@ class FirestoreProvider {
     'modified user to firestore with data ${userData}'.printWhite();
   }
 
-  static Future<void> updateUserToFirestore(
-      {required User user, required String key, required String value}) async {
+  static Future<void> updateParameterToFirestore(
+      {required String collectionName,
+      required User user,
+      required String key,
+      required String value}) async {
     // Prepare user data
     Map<String, dynamic> userData = {key: value};
 
     // Add data to Firestore in 'users' collection with UID as the document ID
-    await firestore.collection('users').doc(user.uid).update(userData);
+    await firestore.collection(collectionName).doc(user.uid).update(userData);
   }
 
   static Stream<String> getUsersBackgroundPictureData({required String uid}) {
     return firestore
-        .collection('users')
+        .collection('parameters')
         .doc(uid)
         .snapshots()
         .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
