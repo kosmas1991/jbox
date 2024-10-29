@@ -14,13 +14,18 @@ class FirestoreProvider {
       'displayName': user.displayName ?? 'Anonymous',
       'photoURL': user.photoURL,
       'createdAt': Timestamp.now(),
-      'backgroundImage':
-          'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62',
     };
 
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).set(userData);
     'added user to firestore with data ${userData}'.printWhite();
+    //also set a default background image
+    await setParameterToFirestore(
+        collectionName: 'parameters',
+        user: user,
+        key: 'backgroundImage',
+        value:
+            'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62');
   }
 
   static Future<void> modifyUserToFirestore(User user) async {
@@ -35,6 +40,18 @@ class FirestoreProvider {
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).update(userData);
     'modified user to firestore with data ${userData}'.printWhite();
+  }
+
+  static Future<void> setParameterToFirestore(
+      {required String collectionName,
+      required User user,
+      required String key,
+      required String value}) async {
+    // Prepare user data
+    Map<String, dynamic> userData = {key: value};
+
+    // Add data to Firestore in 'users' collection with UID as the document ID
+    await firestore.collection(collectionName).doc(user.uid).set(userData);
   }
 
   static Future<void> updateParameterToFirestore(
@@ -55,5 +72,13 @@ class FirestoreProvider {
         .doc(uid)
         .snapshots()
         .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
+  }
+
+    static Stream<String> getUsersProfilePictureData({required String uid}) {
+    return firestore
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) => snapshot.data()?['photoURL'] ?? '');
   }
 }

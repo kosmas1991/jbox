@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
+import 'package:jbox/go_router/go_router.dart';
+import 'package:jbox/main.dart';
+import 'package:jbox/screens/adminscreen/adminscreen.dart';
 import 'package:jbox/screens/homescreen/constants.dart';
 import 'package:jbox/screens/loginscreen/loginscreen.dart';
 
@@ -34,18 +39,47 @@ class LargeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      ElevatedButton(
-                        style: HomeScreenConstants.buttonStyleSmall,
-                        onPressed: () {
-                          GoRouter.of(context).goNamed(LoginScreen.routeName);
-                        },
-                        child: const Text(
-                          HomeScreenConstants.logInText,
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
+                      // checks if user logged in in order to show photURL or Είσοδος
+                      auth.currentUser?.photoURL != null
+                          ? InkWell(
+                              onTap: () => GoRouterProvider.router
+                                  .goNamed(AdminScreen.routeName),
+                              child: ClipOval(
+                                child: Image.network(
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    } else {
+                                      return CircularProgressIndicator(
+                                        color: Colors.black,
+                                      );
+                                    }
+                                  },
+                                  context
+                                      .watch<UserBloc>()
+                                      .state
+                                      .user!
+                                      .photoURL!,
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : ElevatedButton(
+                              style: HomeScreenConstants.buttonStyleSmall,
+                              onPressed: () {
+                                GoRouter.of(context)
+                                    .goNamed(LoginScreen.routeName);
+                              },
+                              child: const Text(
+                                HomeScreenConstants.logInText,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
                     ],
                   )
                 ],

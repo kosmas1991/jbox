@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
+import 'package:jbox/extensions/debug_print_extension.dart';
 import 'package:jbox/firestore/firestore_functios.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
+import 'package:jbox/global%20widgets/mysnackbar.dart';
 import 'package:jbox/global%20widgets/mytextfield.dart';
 import 'package:jbox/main.dart';
 
@@ -64,7 +66,7 @@ class _FillUserDataState extends State<FillUserData> {
                                 buttonText: 'Χρήση προεπιλεγμένης',
                                 fun: () async {
                                   await auth.currentUser?.updatePhotoURL(
-                                      //! uses profile_picture.jpg from firebase storage (JBOX logo)
+                                      //! uses profile_picture.jpg from firebase storage (avatar picture)
                                       'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/profile_picture.jpg?alt=media&token=955a8aff-830b-4f9f-a2fd-4dfab7d42c92');
                                   await FirestoreProvider.modifyUserToFirestore(
                                       auth.currentUser!);
@@ -109,10 +111,32 @@ class _FillUserDataState extends State<FillUserData> {
                   MyGlobalButton(
                       buttonText: 'Αποθήκευση',
                       fun: () async {
-                        await auth.currentUser?.updateDisplayName(
-                            widget.usernameTextEditingController.text);
-                        await FirestoreProvider.modifyUserToFirestore(
-                            auth.currentUser!);
+                        await firestore
+                            .collection('users')
+                            .where('displayName',
+                                isEqualTo:
+                                    widget.usernameTextEditingController.text)
+                            .get()
+                            .then(
+                          (value) async {
+                            if (value.docs.isEmpty) {
+                              'No user with username ${widget.usernameTextEditingController.text} found. Processing it...'
+                                  .printGreen();
+                              await auth.currentUser?.updateDisplayName(
+                                  widget.usernameTextEditingController.text);
+                              await FirestoreProvider.modifyUserToFirestore(
+                                  auth.currentUser!);
+                            } else {
+                              'Username ${widget.usernameTextEditingController.text} found'
+                                  .printError();
+
+                              MyApp.snackbarKey.currentState?.showSnackBar(
+                                  mySnackBar(
+                                      'Το όνομα χρήστη χρησιμοποιείται ήδη',
+                                      severity: Severity.info));
+                            }
+                          },
+                        );
                       }),
                 ],
               ),
