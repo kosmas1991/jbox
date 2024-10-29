@@ -37,7 +37,6 @@ class _AdminScreenState extends State<AdminScreen> {
     //? checking if logged in
     return auth.currentUser == null
         ? LoggedOutAdmin()
-        //TODO checking if personal data is filled
         : BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
               if (checkUserDataFilled(state.user)) {

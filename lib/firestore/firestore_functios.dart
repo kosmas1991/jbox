@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jbox/extensions/debug_print_extension.dart';
@@ -12,6 +14,8 @@ class FirestoreProvider {
       'displayName': user.displayName ?? 'Anonymous',
       'photoURL': user.photoURL,
       'createdAt': Timestamp.now(),
+      'backgroundImage':
+          'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62',
     };
 
     // Add data to Firestore in 'users' collection with UID as the document ID
@@ -31,5 +35,22 @@ class FirestoreProvider {
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).update(userData);
     'modified user to firestore with data ${userData}'.printWhite();
+  }
+
+  static Future<void> updateUserToFirestore(
+      {required User user, required String key, required String value}) async {
+    // Prepare user data
+    Map<String, dynamic> userData = {key: value};
+
+    // Add data to Firestore in 'users' collection with UID as the document ID
+    await firestore.collection('users').doc(user.uid).update(userData);
+  }
+
+  static Stream<String> getUsersBackgroundPictureData({required String uid}) {
+    return firestore
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
   }
 }

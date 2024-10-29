@@ -55,7 +55,7 @@ class _FillUserDataState extends State<FillUserData> {
                             MyGlobalButton(
                                 buttonText: 'Επιλογή εικόνας',
                                 fun: () async {
-                                  await _pickImage();
+                                  await _pickProfileImage();
                                 }),
                             SizedBox(
                               width: 10,
@@ -121,7 +121,7 @@ class _FillUserDataState extends State<FillUserData> {
     );
   }
 
-  Future<void> _pickImage() async {
+  Future<void> _pickProfileImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
