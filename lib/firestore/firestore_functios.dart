@@ -67,18 +67,28 @@ class FirestoreProvider {
   }
 
   static Stream<String> getUsersBackgroundPictureData({required String uid}) {
-    return firestore
-        .collection('parameters')
-        .doc(uid)
-        .snapshots()
-        .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('parameters')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
+    } else {
+      'nothing important, user not logged in anymore'.printWarning();
+      return Stream.empty();
+    }
   }
 
-    static Stream<String> getUsersProfilePictureData({required String uid}) {
-    return firestore
-        .collection('users')
-        .doc(uid)
-        .snapshots()
-        .map((snapshot) => snapshot.data()?['photoURL'] ?? '');
+  static Stream<String> getUsersProfilePictureData({required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('users')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['photoURL'] ?? '');
+    } else {
+      'nothing important, user not logged in anymore'.printWarning();
+      return Stream.empty();
+    }
   }
 }

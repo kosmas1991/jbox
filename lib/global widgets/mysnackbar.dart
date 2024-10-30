@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jbox/extensions/severity_color.dart';
 
-enum Severity { success, error, warning, info }
+enum Severity { success, error, warning, info, black }
 
 SnackBar mySnackBar(String message,
     {Severity severity = Severity.success, Duration? duration}) {

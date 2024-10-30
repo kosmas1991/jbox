@@ -130,10 +130,11 @@ class _FillUserDataState extends State<FillUserData> {
                               'Username ${widget.usernameTextEditingController.text} found'
                                   .printError();
 
-                              MyApp.snackbarKey.currentState?.showSnackBar(
+                              MyApp.snackbarKey.currentState!.showSnackBar(
                                   mySnackBar(
                                       'Το όνομα χρήστη χρησιμοποιείται ήδη',
-                                      severity: Severity.info));
+                                      severity: Severity.black,
+                                      duration: Duration(seconds: 2)));
                             }
                           },
                         );

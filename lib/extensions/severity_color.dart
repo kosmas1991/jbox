@@ -12,6 +12,8 @@ extension SeverityColors on Color {
         return const Color.fromARGB(255, 235, 176, 22);
       case Severity.info:
         return Colors.blue.shade400;
+      case Severity.black:
+        return const Color.fromARGB(255, 0, 0, 0);
     }
   }
 
