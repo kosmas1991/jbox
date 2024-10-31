@@ -90,8 +90,6 @@ class _FillUserDataState extends State<FillUserData> {
                       ],
                     ),
                   ),
-
-                  //TODO check if username already exist at firebase
                   //? username visibility
                   Visibility(
                     visible: state.user?.displayName == null,
@@ -126,6 +124,13 @@ class _FillUserDataState extends State<FillUserData> {
                                   widget.usernameTextEditingController.text);
                               await FirestoreProvider.modifyUserToFirestore(
                                   auth.currentUser!);
+                              await FirestoreProvider
+                                  .updateParameterToFirestore(
+                                      collectionName: 'parameters',
+                                      user: auth.currentUser!,
+                                      key: 'displayName',
+                                      value:
+                                          auth.currentUser!.displayName ?? '');
                             } else {
                               'Username ${widget.usernameTextEditingController.text} found'
                                   .printError();

@@ -19,13 +19,18 @@ class FirestoreProvider {
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).set(userData);
     'added user to firestore with data ${userData}'.printWhite();
-    //also set a default background image
-    await setParameterToFirestore(
+
+    //also set a default background image at parameters collection  //also add the display name at parameters collection
+    // TODO create an initial map with all the parameters like azuracast URL etc
+    await setParametersToFirestore(
         collectionName: 'parameters',
         user: user,
-        key: 'backgroundImage',
-        value:
-            'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62');
+        mapToSet: {
+          'backgroundImage':
+              'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62',
+          'displayName': auth.currentUser!.displayName ?? 'Anonymous',
+          'azuracastURL': 'https://radioserver.gr',
+        });
   }
 
   static Future<void> modifyUserToFirestore(User user) async {
@@ -42,13 +47,12 @@ class FirestoreProvider {
     'modified user to firestore with data ${userData}'.printWhite();
   }
 
-  static Future<void> setParameterToFirestore(
+  static Future<void> setParametersToFirestore(
       {required String collectionName,
       required User user,
-      required String key,
-      required String value}) async {
+      required Map<String, dynamic> mapToSet}) async {
     // Prepare user data
-    Map<String, dynamic> userData = {key: value};
+    Map<String, dynamic> userData = mapToSet;
 
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection(collectionName).doc(user.uid).set(userData);
@@ -74,7 +78,6 @@ class FirestoreProvider {
           .snapshots()
           .map((snapshot) => snapshot.data()?['backgroundImage'] ?? '');
     } else {
-      'nothing important, user not logged in anymore'.printWarning();
       return Stream.empty();
     }
   }
@@ -87,7 +90,18 @@ class FirestoreProvider {
           .snapshots()
           .map((snapshot) => snapshot.data()?['photoURL'] ?? '');
     } else {
-      'nothing important, user not logged in anymore'.printWarning();
+      return Stream.empty();
+    }
+  }
+
+  static Stream<String> getAzuracastLinkData({required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('parameters')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['azuracastURL'] ?? '');
+    } else {
       return Stream.empty();
     }
   }
