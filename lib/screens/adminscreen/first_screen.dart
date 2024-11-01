@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jbox/firestore/firestore_functios.dart';
+import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/extensions/debug_print_extension.dart';
-import 'package:jbox/firestore/firestore_functios.dart';
+import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/global%20widgets/mysnackbar.dart';

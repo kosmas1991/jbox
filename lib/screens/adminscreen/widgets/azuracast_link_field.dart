@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jbox/firestore/firestore_functios.dart';
+import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/mytextfield.dart';
 import 'package:jbox/main.dart';
 
