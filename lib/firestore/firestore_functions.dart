@@ -29,7 +29,7 @@ class FirestoreProvider {
           'backgroundImage':
               'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62',
           'displayName': auth.currentUser!.displayName ?? 'Anonymous',
-          'azuracastURL': 'https://radioserver.gr',
+          'azuracastURL': '',
         });
   }
 
@@ -104,5 +104,35 @@ class FirestoreProvider {
     } else {
       return Stream.empty();
     }
+  }
+
+  static Stream<String> getUsernameDataFromParameters({required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('parameters')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['displayName'] ?? '');
+    } else {
+      return Stream.empty();
+    }
+  }
+
+  static Stream<Map<String, dynamic>?> getAllDataFromParameters(
+      {required String username}) {
+    //! returns null if more than 1 username found at database, else return all data azuracastURL, backgroundimage, displayName etc
+
+    return firestore
+        .collection('parameters')
+        .where('displayName', isEqualTo: username)
+        .snapshots()
+        .map(
+      (event) {
+        if (event.docs.length > 1) {
+          return null;
+        }
+        return event.docs[0].data();
+      },
+    );
   }
 }

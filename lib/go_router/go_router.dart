@@ -28,6 +28,7 @@ class GoRouterProvider {
         path: DisplayScreen.routeName,
         builder: (context, state) => DisplayScreen(
           terminal: state.uri.queryParameters['terminal'] ?? '',
+          scale: 1,
         ),
       ),
     ],
