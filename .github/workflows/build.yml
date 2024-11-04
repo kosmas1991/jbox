@@ -22,3 +22,10 @@ jobs:
         with:
           name: release
           path: build/web
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: jbox.gr
+          username: kosmas@jbox.gr
+          password: ${{ secrets.ftp_password }}
