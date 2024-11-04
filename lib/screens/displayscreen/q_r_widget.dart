@@ -15,7 +15,7 @@ class QRWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return QrImageView(
       backgroundColor: Colors.white,
-      data: 'http://jbox.gr/display?terminal=${data['displayName'] ?? ''}',
+      data: 'http://jbox.gr/#/display?terminal=${data['displayName'] ?? ''}',
       version: QrVersions.auto,
     );
   }

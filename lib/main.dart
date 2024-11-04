@@ -25,7 +25,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  usePathUrlStrategy();
+  //! bug when try to access a page directly, so commented
+  setUrlStrategy(const HashUrlStrategy());
   runApp(MyApp());
 }
 

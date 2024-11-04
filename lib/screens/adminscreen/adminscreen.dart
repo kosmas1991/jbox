@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jbox/blocs/user/user_bloc.dart';
 import 'package:jbox/global%20widgets/mainlogo.dart';
+import 'package:jbox/go_router/go_router.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/responsiveness/responsive_widget.dart';
 import 'package:jbox/screens/adminscreen/drawer_button.dart';
@@ -13,8 +14,9 @@ import 'package:jbox/screens/adminscreen/first_screen.dart';
 import 'package:jbox/screens/adminscreen/loggedoutadmin.dart';
 import 'package:jbox/screens/adminscreen/second_screen.dart';
 import 'package:jbox/screens/adminscreen/third_screen.dart';
+import 'package:jbox/screens/homescreen/homescreen.dart';
 
-//? Admin screen will be a 3 vertical screen combination. 1st: parameters, 2nd: display screen preview, 3rd: not sure (maybe profile pic image, log out button etc)
+//? Admin screen is a 3 vertical screen combination. 1st: parameters, 2nd: display screen preview, 3rd: not sure (maybe profile pic image, log out button etc)
 //? with desktop mode all three are visible, with tablet first two, mobile only second screen
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -59,7 +61,10 @@ class _AdminScreenState extends State<AdminScreen> {
                         height: 40,
                         child: Row(
                           children: [
-                            MainLogo(),
+                            InkWell(
+                                onTap: () => GoRouterProvider.router
+                                    .goNamed(HomeScreen.routeName),
+                                child: MainLogo()),
                             SizedBox(
                               width: 20,
                             ),
