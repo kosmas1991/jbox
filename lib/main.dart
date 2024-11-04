@@ -20,6 +20,7 @@ var firestore = FirebaseFirestore.instance;
 //! flutter run -d chrome --web-renderer html
 //! flutter build web --web-renderer html --release
 
+//test build commit
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
