@@ -46,39 +46,117 @@ class _FirstScreenState extends State<FirstScreen> {
             SizedBox(
               height: 10,
             ),
-            MyGlobalButton(
-                buttonText: 'Επιλογή εικόνας',
-                fun: () async {
-                  await _pickBackgroundImage();
-                }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MyGlobalButton(
+                    buttonText: 'Επιλογή εικόνας',
+                    fun: () async {
+                      await _pickBackgroundImage();
+                    }),
+                SizedBox(
+                  width: 10,
+                ),
+                StreamBuilder<String>(
+                    stream: FirestoreProvider
+                        .getShowBackgroundImageDataFromParameters(
+                            uid: auth.currentUser?.uid ?? ''),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
+                        );
+                      }
+                      var showValue = snapshot.data;
+                      return InkWell(
+                        onTap: () async {
+                          if (showValue == 'true') {
+                            FirestoreProvider.updateParameterToFirestore(
+                                collectionName: 'parameters',
+                                user: auth.currentUser!,
+                                key: 'showBackgroundImageAtFirstScreen',
+                                value: 'false');
+                          } else {
+                            FirestoreProvider.updateParameterToFirestore(
+                                collectionName: 'parameters',
+                                user: auth.currentUser!,
+                                key: 'showBackgroundImageAtFirstScreen',
+                                value: 'true');
+                          }
+                        },
+                        child: showValue == 'false'
+                            ? Icon(Icons.image)
+                            : Icon(Icons.hide_image_outlined),
+                      );
+                    }),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            InkWell(
+                onTap: () {
+                  FirestoreProvider.updateParameterToFirestore(
+                      collectionName: 'parameters',
+                      user: auth.currentUser!,
+                      key: 'backgroundImage',
+                      value:
+                          'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62');
+                },
+                child: Text(
+                  '(Ορισμός προεπιλεγμένης φωτογραφίας)',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
             SizedBox(
               height: 10,
             ),
             // background image URL stream
             StreamBuilder<String>(
-                stream: FirestoreProvider.getUsersBackgroundPictureData(
-                    uid: auth.currentUser?.uid ?? ''),
+                stream: FirestoreProvider
+                    .getshowBackgroundImageAtFirstScreenDataFromParameters(
+                        uid: auth.currentUser?.uid ?? ''),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return CircularProgressIndicator(
-                      color: Colors.black,
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ),
                     );
                   }
-                  return Image.network(
-                    height: 200,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      } else {
-                        return CircularProgressIndicator(
-                          color: Colors.black,
-                        );
-                      }
-                    },
-                    snapshot.data!,
-                    fit: BoxFit.cover,
+                  return Visibility(
+                    visible: snapshot.data! == 'true' ? true : false,
+                    child: StreamBuilder<String>(
+                        stream: FirestoreProvider.getUsersBackgroundPictureData(
+                            uid: auth.currentUser?.uid ?? ''),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return CircularProgressIndicator(
+                              color: Colors.black,
+                            );
+                          }
+                          return Image.network(
+                            height: 200,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return CircularProgressIndicator(
+                                  color: Colors.black,
+                                );
+                              }
+                            },
+                            snapshot.data!,
+                            fit: BoxFit.cover,
+                          );
+                        }),
                   );
                 }),
+            SizedBox(
+              height: 20,
+            ),
+            Text('next widget here'),
           ],
         ),
       ),

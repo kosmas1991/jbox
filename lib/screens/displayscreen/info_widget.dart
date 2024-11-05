@@ -122,6 +122,8 @@ class InfoWidget extends StatelessWidget {
                       stream: AzuracastProvider.nowPlayingStream(
                           url: data['azuracastURL']),
                       builder: (context, snapshot) {
+                        if (snapshot.data == null) {}
+                        if (snapshot.hasError) {}
                         if (!snapshot.hasData) {
                           return Center(
                             child: CircularProgressIndicator(

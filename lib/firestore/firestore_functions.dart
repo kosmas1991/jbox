@@ -30,6 +30,7 @@ class FirestoreProvider {
               'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/background_picture.png?alt=media&token=7d2fcfad-fac4-45e3-9a87-d45003985a62',
           'displayName': auth.currentUser!.displayName ?? 'Anonymous',
           'azuracastURL': '',
+          'showBackgroundImageAtFirstScreen': 'true',
         });
   }
 
@@ -113,6 +114,28 @@ class FirestoreProvider {
           .doc(uid)
           .snapshots()
           .map((snapshot) => snapshot.data()?['displayName'] ?? '');
+    } else {
+      return Stream.empty();
+    }
+  }
+
+  static Stream<String> getShowBackgroundImageDataFromParameters(
+      {required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore.collection('parameters').doc(uid).snapshots().map(
+          (snapshot) =>
+              snapshot.data()?['showBackgroundImageAtFirstScreen'] ?? '');
+    } else {
+      return Stream.empty();
+    }
+  }
+
+  static Stream<String> getshowBackgroundImageAtFirstScreenDataFromParameters(
+      {required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore.collection('parameters').doc(uid).snapshots().map(
+          (snapshot) =>
+              snapshot.data()?['showBackgroundImageAtFirstScreen'] ?? '');
     } else {
       return Stream.empty();
     }

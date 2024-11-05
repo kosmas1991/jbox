@@ -4,20 +4,19 @@ import 'package:http/http.dart' as http;
 
 class AzuracastProvider {
   static Future<NowPlaying> getNowPlaying({required String url}) async {
-    Future<Response> response = http.get(Uri.parse('$url/api/nowplaying'));
-    NowPlaying nowPlaying = await response.then((value) {
-      return nowPlayingFromJson(value.body)[0];
-    });
+    Response response = await http.get(Uri.parse('$url/api/nowplaying'));
+    NowPlaying nowPlaying = nowPlayingFromJson(response.body).first;
     return nowPlaying;
   }
 
-  //? stram that returns getNowPlaying() data every 10 seconds
+  //? stream that returns getNowPlaying() data every 10 seconds
   static Stream<NowPlaying> nowPlayingStream({required String url}) async* {
     // Emit the first NowPlaying data immediately
     yield await getNowPlaying(url: url);
 
     // Then, emit data every 5 seconds
-    await for (final _ in Stream.periodic(Duration(seconds: 10))) {
+    await for (final _
+        in Stream.periodic(Duration(seconds: 10)).asBroadcastStream()) {
       yield await getNowPlaying(url: url);
     }
   }
