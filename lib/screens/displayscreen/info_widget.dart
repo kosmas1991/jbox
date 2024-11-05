@@ -81,15 +81,21 @@ class InfoWidget extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  snapshot.data!.nowPlaying!.song!.title
-                                      .toString(),
-                                  style: screenTextStyle,
+                                Container(
+                                  width: maxWidth * 1.3 / 3,
+                                  child: Text(
+                                    snapshot.data!.nowPlaying!.song!.title
+                                        .toString(),
+                                    style: screenTextStyle,
+                                  ),
                                 ),
-                                Text(
-                                  snapshot.data!.nowPlaying!.song!.artist
-                                      .toString(),
-                                  style: screenTextStyle,
+                                Container(
+                                  width: maxWidth * 1.3 / 3,
+                                  child: Text(
+                                    snapshot.data!.nowPlaying!.song!.artist
+                                        .toString(),
+                                    style: screenTextStyle,
+                                  ),
                                 ),
                               ],
                             ),
@@ -155,15 +161,21 @@ class InfoWidget extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  snapshot.data!.playingNext!.song!.title
-                                      .toString(),
-                                  style: screenTextStyle,
+                                Container(
+                                  width: maxWidth * 1.3 / 3,
+                                  child: Text(
+                                    snapshot.data!.playingNext!.song!.title
+                                        .toString(),
+                                    style: screenTextStyle,
+                                  ),
                                 ),
-                                Text(
-                                  snapshot.data!.playingNext!.song!.artist
-                                      .toString(),
-                                  style: screenTextStyle,
+                                Container(
+                                  width: maxWidth * 1.3 / 3,
+                                  child: Text(
+                                    snapshot.data!.playingNext!.song!.artist
+                                        .toString(),
+                                    style: screenTextStyle,
+                                  ),
                                 ),
                               ],
                             ),
