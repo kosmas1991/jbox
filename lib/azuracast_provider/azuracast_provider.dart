@@ -11,6 +11,7 @@ class AzuracastProvider {
     return nowPlaying;
   }
 
+  //? stram that returns getNowPlaying() data every 10 seconds
   static Stream<NowPlaying> nowPlayingStream({required String url}) async* {
     // Emit the first NowPlaying data immediately
     yield await getNowPlaying(url: url);
