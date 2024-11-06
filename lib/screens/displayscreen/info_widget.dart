@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:jbox/azuracast_provider/azuracast_provider.dart';
 import 'package:jbox/extensions/debug_print_extension.dart';
@@ -5,7 +6,7 @@ import 'package:jbox/models/nowplaying.dart';
 
 //TODO replace !s with ?s for null safety
 
-class InfoWidget extends StatelessWidget {
+class InfoWidget extends StatefulWidget {
   const InfoWidget({
     super.key,
     required this.data,
@@ -16,9 +17,33 @@ class InfoWidget extends StatelessWidget {
   final double scale;
 
   @override
+  State<InfoWidget> createState() => _InfoWidgetState();
+}
+
+class _InfoWidgetState extends State<InfoWidget> {
+  AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
+  late Future<NowPlaying> nowPlaying;
+  @override
+  void initState() {
+    nowPlaying =
+        AzuracastProvider.getNowPlaying(url: widget.data['azuracastURL']);
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    nowPlaying.then(
+      (value) => _assetsAudioPlayer.open(
+          Audio.liveStream(value.station!.mounts!.first.url ?? ''),
+          autoStart: true,
+          playInBackground: PlayInBackground.enabled,
+          volume: 1,
+          showNotification: true),
+    );
+
     var dataStream =
-        AzuracastProvider.nowPlayingStream(url: data['azuracastURL'])
+        AzuracastProvider.nowPlayingStream(url: widget.data['azuracastURL'])
             .asBroadcastStream();
     double width = MediaQuery.of(context).size.width;
     'width is ${width}'.printWhite();
@@ -33,6 +58,7 @@ class InfoWidget extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //! playing now data
             Container(
               width: maxWidth * 2 / 3,
               padding: EdgeInsets.all(maxWidth / 40),
@@ -54,11 +80,22 @@ class InfoWidget extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
+                            child: Container(
+                              width: maxWidth / 30,
+                              height: maxWidth / 30,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
                             ),
                           );
                         }
+                        if (snapshot.hasError) {
+                          return Text(
+                            'Συνέβη κάποιο σφάλμα!',
+                            style: screenTextStyle,
+                          );
+                        }
+
                         return Row(
                           children: [
                             Image.network(
@@ -67,8 +104,12 @@ class InfoWidget extends StatelessWidget {
                                 if (loadingProgress == null) {
                                   return child;
                                 } else {
-                                  return CircularProgressIndicator(
-                                    color: Colors.black,
+                                  return Container(
+                                    width: maxWidth / 30,
+                                    height: maxWidth / 30,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    ),
                                   );
                                 }
                               },
@@ -103,13 +144,80 @@ class InfoWidget extends StatelessWidget {
                             ),
                           ],
                         );
-                      })
+                      }),
+                  SizedBox(
+                    height: maxWidth / 30,
+                  ),
+                  //! player and volume
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: IconButton(
+                            onPressed: () {
+                              _assetsAudioPlayer.playOrPause();
+                            },
+                            icon: PlayerBuilder.isPlaying(
+                                player: _assetsAudioPlayer,
+                                builder: (context, isPlaying) => isPlaying
+                                    ? Icon(
+                                        Icons.pause_circle_outline,
+                                        size: maxWidth / 15,
+                                        color: Colors.blue,
+                                      )
+                                    : Icon(
+                                        Icons.play_circle_outline,
+                                        size: maxWidth / 15,
+                                        color: Colors.blue,
+                                      ))),
+                      ),
+                      Flexible(
+                        flex: 3,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: Icon(
+                                Icons.volume_mute,
+                                color: Colors.grey,
+                                size: maxWidth / 20,
+                              ),
+                            ),
+                            Flexible(
+                              flex: 3,
+                              child: PlayerBuilder.volume(
+                                player: _assetsAudioPlayer,
+                                builder: (context, volume) => Slider(
+                                  activeColor: Colors.grey,
+                                  value: volume,
+                                  onChanged: (value) {
+                                    _assetsAudioPlayer.setVolume(value);
+                                  },
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: Icon(
+                                Icons.volume_up,
+                                color: Colors.grey,
+                                size: maxWidth / 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
             SizedBox(
               height: maxWidth / 30,
             ),
+            //! next song data
             Container(
               width: maxWidth * 2 / 3,
               padding: EdgeInsets.all(maxWidth / 40),
@@ -129,13 +237,21 @@ class InfoWidget extends StatelessWidget {
                   StreamBuilder<NowPlaying>(
                       stream: dataStream,
                       builder: (context, snapshot) {
-                        if (snapshot.data == null) {}
-                        if (snapshot.hasError) {}
                         if (!snapshot.hasData) {
                           return Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
+                            child: Container(
+                              width: maxWidth / 30,
+                              height: maxWidth / 30,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
                             ),
+                          );
+                        }
+                        if (snapshot.hasError) {
+                          return Text(
+                            'Συνέβη κάποιο σφάλμα!',
+                            style: screenTextStyle,
                           );
                         }
                         return Row(
@@ -146,8 +262,12 @@ class InfoWidget extends StatelessWidget {
                                 if (loadingProgress == null) {
                                   return child;
                                 } else {
-                                  return CircularProgressIndicator(
-                                    color: Colors.black,
+                                  return Container(
+                                    width: maxWidth / 30,
+                                    height: maxWidth / 30,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    ),
                                   );
                                 }
                               },
