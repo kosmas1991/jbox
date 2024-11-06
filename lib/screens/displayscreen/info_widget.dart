@@ -181,7 +181,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                               child: Icon(
                                 Icons.volume_mute,
                                 color: Colors.grey,
-                                size: maxWidth / 20,
+                                size: maxWidth / 25,
                               ),
                             ),
                             Flexible(
@@ -202,7 +202,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                               child: Icon(
                                 Icons.volume_up,
                                 color: Colors.grey,
-                                size: maxWidth / 20,
+                                size: maxWidth / 25,
                               ),
                             ),
                           ],
