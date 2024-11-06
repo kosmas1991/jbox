@@ -17,6 +17,9 @@ class InfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dataStream =
+        AzuracastProvider.nowPlayingStream(url: data['azuracastURL'])
+            .asBroadcastStream();
     double width = MediaQuery.of(context).size.width;
     'width is ${width}'.printWhite();
     return LayoutBuilder(
@@ -47,8 +50,7 @@ class InfoWidget extends StatelessWidget {
                     height: maxWidth / 30,
                   ),
                   StreamBuilder<NowPlaying>(
-                      stream: AzuracastProvider.nowPlayingStream(
-                          url: data['azuracastURL']),
+                      stream: dataStream,
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return Center(
@@ -125,8 +127,7 @@ class InfoWidget extends StatelessWidget {
                     height: maxWidth / 30,
                   ),
                   StreamBuilder<NowPlaying>(
-                      stream: AzuracastProvider.nowPlayingStream(
-                          url: data['azuracastURL']),
+                      stream: dataStream,
                       builder: (context, snapshot) {
                         if (snapshot.data == null) {}
                         if (snapshot.hasError) {}

@@ -15,8 +15,7 @@ class AzuracastProvider {
     yield await getNowPlaying(url: url);
 
     // Then, emit data every 5 seconds
-    await for (final _
-        in Stream.periodic(Duration(seconds: 10)).asBroadcastStream()) {
+    await for (final _ in Stream.periodic(Duration(seconds: 10))) {
       yield await getNowPlaying(url: url);
     }
   }
