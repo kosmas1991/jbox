@@ -27,12 +27,6 @@ class _InfoWidgetState extends State<InfoWidget> {
   void initState() {
     nowPlaying =
         AzuracastProvider.getNowPlaying(url: widget.data['azuracastURL']);
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     nowPlaying.then(
       (value) => _assetsAudioPlayer.open(
         Audio.liveStream(value.station!.mounts!.first.url ?? ''),
@@ -42,7 +36,11 @@ class _InfoWidgetState extends State<InfoWidget> {
         showNotification: true,
       ),
     );
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     var dataStream =
         AzuracastProvider.nowPlayingStream(url: widget.data['azuracastURL'])
             .asBroadcastStream();
