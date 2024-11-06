@@ -31,9 +31,9 @@ class _InfoWidgetState extends State<InfoWidget> {
       (value) => _assetsAudioPlayer.open(
         Audio.liveStream(value.station!.mounts!.first.url ?? ''),
         autoStart: false,
-        playInBackground: PlayInBackground.enabled,
+        // playInBackground: PlayInBackground.enabled,
         volume: 1,
-        showNotification: true,
+        // showNotification: true,
       ),
     );
     super.initState();
