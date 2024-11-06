@@ -35,11 +35,12 @@ class _InfoWidgetState extends State<InfoWidget> {
   Widget build(BuildContext context) {
     nowPlaying.then(
       (value) => _assetsAudioPlayer.open(
-          Audio.liveStream(value.station!.mounts!.first.url ?? ''),
-          autoStart: true,
-          playInBackground: PlayInBackground.enabled,
-          volume: 1,
-          showNotification: true),
+        Audio.liveStream(value.station!.mounts!.first.url ?? ''),
+        autoStart: false,
+        // playInBackground: PlayInBackground.enabled,
+        volume: 1,
+        // showNotification: true,
+      ),
     );
 
     var dataStream =
