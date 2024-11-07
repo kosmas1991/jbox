@@ -77,7 +77,61 @@ class _InfoWidgetState extends State<InfoWidget> {
                   StreamBuilder<NowPlaying>(
                       stream: dataStream,
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
+                        if (snapshot.hasData) {
+                          return Row(
+                            children: [
+                              Image.network(
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  } else {
+                                    return Container(
+                                      width: maxWidth / 30,
+                                      height: maxWidth / 30,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  }
+                                },
+                                snapshot.data!.nowPlaying!.song!.art!,
+                                width: maxWidth / 8,
+                                height: maxWidth / 8,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                width: maxWidth / 30,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: maxWidth * 1.3 / 3,
+                                    child: Text(
+                                      snapshot.data!.nowPlaying!.song!.title
+                                          .toString(),
+                                      style: screenTextStyle,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: maxWidth * 1.3 / 3,
+                                    child: Text(
+                                      snapshot.data!.nowPlaying!.song!.artist
+                                          .toString(),
+                                      style: screenTextStyle,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text(
+                            'Συνέβη κάποιο σφάλμα! Ελέγξτε την παράμετρο azuracast URL',
+                            style: screenTextStyle,
+                          );
+                        } else {
                           return Center(
                             child: Container(
                               width: maxWidth / 30,
@@ -88,61 +142,6 @@ class _InfoWidgetState extends State<InfoWidget> {
                             ),
                           );
                         }
-                        if (snapshot.hasError) {
-                          return Text(
-                            'Συνέβη κάποιο σφάλμα!',
-                            style: screenTextStyle,
-                          );
-                        }
-
-                        return Row(
-                          children: [
-                            Image.network(
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return Container(
-                                    width: maxWidth / 30,
-                                    height: maxWidth / 30,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black,
-                                    ),
-                                  );
-                                }
-                              },
-                              snapshot.data!.nowPlaying!.song!.art!,
-                              width: maxWidth / 8,
-                              height: maxWidth / 8,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(
-                              width: maxWidth / 30,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: maxWidth * 1.3 / 3,
-                                  child: Text(
-                                    snapshot.data!.nowPlaying!.song!.title
-                                        .toString(),
-                                    style: screenTextStyle,
-                                  ),
-                                ),
-                                Container(
-                                  width: maxWidth * 1.3 / 3,
-                                  child: Text(
-                                    snapshot.data!.nowPlaying!.song!.artist
-                                        .toString(),
-                                    style: screenTextStyle,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
                       }),
                   SizedBox(
                     height: maxWidth / 30,
@@ -236,7 +235,61 @@ class _InfoWidgetState extends State<InfoWidget> {
                   StreamBuilder<NowPlaying>(
                       stream: dataStream,
                       builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
+                        if (snapshot.hasData) {
+                          return Row(
+                            children: [
+                              Image.network(
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  } else {
+                                    return Container(
+                                      width: maxWidth / 30,
+                                      height: maxWidth / 30,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.black,
+                                      ),
+                                    );
+                                  }
+                                },
+                                snapshot.data!.playingNext!.song!.art!,
+                                width: maxWidth / 8,
+                                height: maxWidth / 8,
+                                fit: BoxFit.cover,
+                              ),
+                              SizedBox(
+                                width: maxWidth / 30,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: maxWidth * 1.3 / 3,
+                                    child: Text(
+                                      snapshot.data!.playingNext!.song!.title
+                                          .toString(),
+                                      style: screenTextStyle,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: maxWidth * 1.3 / 3,
+                                    child: Text(
+                                      snapshot.data!.playingNext!.song!.artist
+                                          .toString(),
+                                      style: screenTextStyle,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text(
+                            'Συνέβη κάποιο σφάλμα! Ελέγξτε την παράμετρο azuracast URL',
+                            style: screenTextStyle,
+                          );
+                        } else {
                           return Center(
                             child: Container(
                               width: maxWidth / 30,
@@ -247,60 +300,6 @@ class _InfoWidgetState extends State<InfoWidget> {
                             ),
                           );
                         }
-                        if (snapshot.hasError) {
-                          return Text(
-                            'Συνέβη κάποιο σφάλμα!',
-                            style: screenTextStyle,
-                          );
-                        }
-                        return Row(
-                          children: [
-                            Image.network(
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return Container(
-                                    width: maxWidth / 30,
-                                    height: maxWidth / 30,
-                                    child: CircularProgressIndicator(
-                                      color: Colors.black,
-                                    ),
-                                  );
-                                }
-                              },
-                              snapshot.data!.playingNext!.song!.art!,
-                              width: maxWidth / 8,
-                              height: maxWidth / 8,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(
-                              width: maxWidth / 30,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: maxWidth * 1.3 / 3,
-                                  child: Text(
-                                    snapshot.data!.playingNext!.song!.title
-                                        .toString(),
-                                    style: screenTextStyle,
-                                  ),
-                                ),
-                                Container(
-                                  width: maxWidth * 1.3 / 3,
-                                  child: Text(
-                                    snapshot.data!.playingNext!.song!.artist
-                                        .toString(),
-                                    style: screenTextStyle,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
                       })
                 ],
               ),
