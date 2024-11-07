@@ -76,14 +76,44 @@ class _AdminScreenState extends State<AdminScreen> {
                           child: ResponsiveWidget(
                         largeScreen: Row(
                           children: [
-                            Expanded(flex: 2, child: FirstScreen()),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        right: BorderSide(
+                                            color: Colors.black, width: 0.2))),
+                                child: Center(child: FirstScreen()),
+                                height: double.infinity,
+                              ),
+                            ),
                             Expanded(flex: 3, child: SecondScreen()),
-                            Expanded(flex: 2, child: ThirdScreen()),
+                            Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          left: BorderSide(
+                                              color: Colors.black,
+                                              width: 0.2))),
+                                  child: Center(child: ThirdScreen()),
+                                  height: double.infinity,
+                                )),
                           ],
                         ),
                         mediumScreen: Row(
                           children: [
-                            Expanded(flex: 2, child: FirstScreen()),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        right: BorderSide(
+                                            color: Colors.black, width: 0.2))),
+                                child: Center(child: FirstScreen()),
+                                height: double.infinity,
+                              ),
+                            ),
                             Expanded(flex: 3, child: SecondScreen()),
                             Builder(
                               builder: (context) => MyDrawerButton(
