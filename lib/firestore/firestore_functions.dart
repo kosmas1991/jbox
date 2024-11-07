@@ -31,6 +31,7 @@ class FirestoreProvider {
           'displayName': auth.currentUser!.displayName ?? 'Anonymous',
           'azuracastURL': '',
           'showBackgroundImageAtFirstScreen': 'true',
+          'infoTextField': ''
         });
   }
 
@@ -107,6 +108,18 @@ class FirestoreProvider {
     }
   }
 
+  static Stream<String> getDisplayScreenInfoTextData({required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('parameters')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['infoTextField'] ?? '');
+    } else {
+      return Stream.empty();
+    }
+  }
+
   static Stream<String> getUsernameDataFromParameters({required String uid}) {
     if (auth.currentUser != null) {
       return firestore
@@ -130,12 +143,24 @@ class FirestoreProvider {
     }
   }
 
-  static Stream<String> getshowBackgroundImageAtFirstScreenDataFromParameters(
+  static Stream<String> getShowBackgroundImageAtFirstScreenDataFromParameters(
       {required String uid}) {
     if (auth.currentUser != null) {
       return firestore.collection('parameters').doc(uid).snapshots().map(
           (snapshot) =>
               snapshot.data()?['showBackgroundImageAtFirstScreen'] ?? '');
+    } else {
+      return Stream.empty();
+    }
+  }
+
+  static Stream<String> getInfoTextFieldFromParameters({required String uid}) {
+    if (auth.currentUser != null) {
+      return firestore
+          .collection('parameters')
+          .doc(uid)
+          .snapshots()
+          .map((snapshot) => snapshot.data()?['infoTextField'] ?? '');
     } else {
       return Stream.empty();
     }

@@ -7,6 +7,7 @@ import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';
+import 'package:jbox/screens/adminscreen/widgets/display_screen_info_text_field.dart';
 import 'package:jbox/screens/adminscreen/widgets/username_field.dart';
 
 //!TODO add a wallpaper upload image
@@ -115,7 +116,7 @@ class _FirstScreenState extends State<FirstScreen> {
             // background image URL stream
             StreamBuilder<String>(
                 stream: FirestoreProvider
-                    .getshowBackgroundImageAtFirstScreenDataFromParameters(
+                    .getShowBackgroundImageAtFirstScreenDataFromParameters(
                         uid: auth.currentUser?.uid ?? ''),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
@@ -156,7 +157,11 @@ class _FirstScreenState extends State<FirstScreen> {
             SizedBox(
               height: 20,
             ),
-            Text('next widget here'),
+            Text('Κείμενο πληροφοριών'),
+            SizedBox(
+              height: 10,
+            ),
+            DisplayScreenInfoTextField(),
           ],
         ),
       ),
