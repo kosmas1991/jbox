@@ -6,7 +6,7 @@ class CookieConsentBanner extends StatefulWidget {
   _CookieConsentBannerState createState() => _CookieConsentBannerState();
 }
 
-//todo create a cookie policy page and add cookie banner at every page, not only homepage
+//todo create a cookie policy page and add cookie banner at every page, not only homepage (wrapping top widget with stack)
 
 class _CookieConsentBannerState extends State<CookieConsentBanner> {
   bool _isBannerVisible = false;

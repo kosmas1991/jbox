@@ -187,12 +187,24 @@ class _InfoWidgetState extends State<InfoWidget> {
                               flex: 3,
                               child: PlayerBuilder.volume(
                                 player: _assetsAudioPlayer,
-                                builder: (context, volume) => Slider(
-                                  activeColor: Colors.grey,
-                                  value: volume,
-                                  onChanged: (value) {
-                                    _assetsAudioPlayer.setVolume(value);
-                                  },
+                                builder: (context, volume) => SliderTheme(
+                                  data: SliderTheme.of(context).copyWith(
+                                    trackHeight:
+                                        maxWidth / 80, // Make the track thinner
+                                    thumbShape: RoundSliderThumbShape(
+                                        enabledThumbRadius: maxWidth /
+                                            40), // Smaller thumb size
+                                    overlayShape: RoundSliderOverlayShape(
+                                        overlayRadius: maxWidth /
+                                            20), // Smaller overlay on drag
+                                  ),
+                                  child: Slider(
+                                    activeColor: Colors.grey,
+                                    value: volume,
+                                    onChanged: (value) {
+                                      _assetsAudioPlayer.setVolume(value);
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
