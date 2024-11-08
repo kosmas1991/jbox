@@ -20,7 +20,7 @@ var firestore = FirebaseFirestore.instance;
 //! flutter run -d chrome --web-renderer html
 //! flutter build web --web-renderer html --release
 
-//todo full screen button and bottom banner
+//todo full screen button
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -47,13 +47,16 @@ class _AdminScreenState extends State<AdminScreen> {
                   drawer: Drawer(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.zero)),
-                    child: DrawerContent(label: 'Left Drawer (First Screen)'),
+                    child: Center(
+                        child:
+                            DrawerContent(label: 'Left Drawer (First Screen)')),
                   ),
                   endDrawer: Drawer(
                     shape: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.zero)),
-                    child:
-                        EndDrawerContent(label: 'Right Drawer (Third Screen)'),
+                    child: Center(
+                        child: EndDrawerContent(
+                            label: 'Right Drawer (Third Screen)')),
                   ),
                   body: Column(
                     children: [
