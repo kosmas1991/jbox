@@ -4,6 +4,7 @@ import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/main.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
+import 'dart:html';
 
 class SecondScreen extends StatelessWidget {
   @override
@@ -15,6 +16,13 @@ class SecondScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              MyGlobalButton(
+                buttonText: 'Προβολή σε πλήρη οθόνη',
+                fun: () => goFullScreen(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                   height: 400,
                   child: StreamBuilder<String>(
@@ -52,5 +60,9 @@ class SecondScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void goFullScreen() {
+    document.documentElement?.requestFullscreen();
   }
 }
