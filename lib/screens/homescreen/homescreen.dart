@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jbox/cookies/cookies.dart';
 import 'package:jbox/responsiveness/responsive_widget.dart';
 import 'package:jbox/screens/homescreen/screensizes/largescreen.dart';
 import 'package:jbox/screens/homescreen/screensizes/mediumscreen.dart';
@@ -15,9 +16,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ResponsiveWidget(
-        largeScreen: LargeScreen(),
-        mediumScreen: MediumScreen(),
-        smallScreen: SmallScreen(),
+        largeScreen: Stack(children: [LargeScreen(), CookieConsentBanner()]),
+        mediumScreen: Stack(children: [MediumScreen(), CookieConsentBanner()]),
+        smallScreen: Stack(children: [SmallScreen(), CookieConsentBanner()]),
       ),
     );
   }
