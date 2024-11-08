@@ -62,7 +62,7 @@ class DisplayScreenContents extends StatelessWidget {
                               child: Text(
                                 snapshot.data ?? '',
                                 style: TextStyle(
-                                    fontSize: maxHeight / 40,
+                                    fontSize: maxHeight / 30,
                                     color: Colors.white),
                               ),
                               scrollDirection: Axis.horizontal,

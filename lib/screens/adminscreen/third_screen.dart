@@ -20,6 +20,10 @@ class ThirdScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+              Text('Δωρεάν άδεια. Λήξη -'),
+              SizedBox(
+                height: 10,
+              ),
               ClipOval(
                 child: StreamBuilder(
                   stream: FirestoreProvider.getUsersProfilePictureData(
