@@ -36,9 +36,12 @@ class SecondScreen extends StatelessWidget {
                             ),
                           );
                         }
-                        return DisplayScreen(
-                          terminal: snapshot.data ?? '',
-                          scale: 0.5,
+                        //! absorbpointer added to prevent interaction with the screen (only shows it :D)
+                        return AbsorbPointer(
+                          child: DisplayScreen(
+                            terminal: snapshot.data ?? '',
+                            scale: 0.5,
+                          ),
                         );
                       })),
               SizedBox(
