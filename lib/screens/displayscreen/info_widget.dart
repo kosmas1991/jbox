@@ -4,17 +4,13 @@ import 'package:jbox/azuracast_provider/azuracast_provider.dart';
 import 'package:jbox/extensions/debug_print_extension.dart';
 import 'package:jbox/models/nowplaying.dart';
 
-//TODO replace !s with ?s for null safety
-
 class InfoWidget extends StatefulWidget {
   const InfoWidget({
     super.key,
     required this.data,
-    required this.scale,
   });
 
   final Map<String, dynamic> data;
-  final double scale;
 
   @override
   State<InfoWidget> createState() => _InfoWidgetState();

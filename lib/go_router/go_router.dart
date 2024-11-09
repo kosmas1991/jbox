@@ -3,6 +3,7 @@ import 'package:jbox/screens/adminscreen/adminscreen.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
 import 'package:jbox/screens/homescreen/homescreen.dart';
 import 'package:jbox/screens/loginscreen/loginscreen.dart';
+import 'package:jbox/screens/requestscreen/requestscreen.dart';
 
 class GoRouterProvider {
   static final GoRouter router = GoRouter(
@@ -28,7 +29,13 @@ class GoRouterProvider {
         path: DisplayScreen.routeName,
         builder: (context, state) => DisplayScreen(
           terminal: state.uri.queryParameters['terminal'] ?? '',
-          scale: 1,
+        ),
+      ),
+      GoRoute(
+        name: RequestScreen.routeName,
+        path: RequestScreen.routeName,
+        builder: (context, state) => RequestScreen(
+          terminal: state.uri.queryParameters['terminal'] ?? '',
         ),
       ),
     ],

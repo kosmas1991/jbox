@@ -40,7 +40,6 @@ class SecondScreen extends StatelessWidget {
                         return AbsorbPointer(
                           child: DisplayScreen(
                             terminal: snapshot.data ?? '',
-                            scale: 0.5,
                           ),
                         );
                       })),

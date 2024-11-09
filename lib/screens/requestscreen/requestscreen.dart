@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jbox/firestore/firestore_functions.dart';
-import 'package:jbox/screens/displayscreen/display_screen_contents.dart';
 
-class DisplayScreen extends StatelessWidget {
+class RequestScreen extends StatelessWidget {
   final String terminal;
-  const DisplayScreen({super.key, this.terminal = ''});
+  const RequestScreen({super.key, this.terminal = ''});
 
-  static final String routeName = '/display';
+  static final String routeName = '/request';
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +33,11 @@ class DisplayScreen extends StatelessWidget {
                     image: DecorationImage(
                         image: NetworkImage(data['backgroundImage']),
                         fit: BoxFit.cover)),
-                //! DISPLAY screen contents here
-                child: DisplayScreenContents(
-                  data: data,
+                //! REQUEST screen contents here
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  color: Colors.amber,
                 ),
               );
             }

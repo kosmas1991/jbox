@@ -9,11 +9,9 @@ class DisplayScreenContents extends StatelessWidget {
   const DisplayScreenContents({
     super.key,
     required this.data,
-    required this.scale,
   });
 
   final Map<String, dynamic> data;
-  final double scale;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,6 @@ class DisplayScreenContents extends StatelessWidget {
                     //! INFO widget
                     child: InfoWidget(
                       data: data,
-                      scale: scale,
                     ),
                   ),
                   Flexible(
@@ -39,7 +36,6 @@ class DisplayScreenContents extends StatelessWidget {
                     //! QR widget
                     child: QRWidget(
                       data: data,
-                      scale: scale,
                     ),
                   ),
                 ],
