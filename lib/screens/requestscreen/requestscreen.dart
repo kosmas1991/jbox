@@ -38,6 +38,7 @@ class RequestScreen extends StatelessWidget {
                   width: 300,
                   height: 300,
                   color: Colors.amber,
+                  child: Text('terminal found ${terminal} and image URL fetched ${data['backgroundImage']}'),
                 ),
               );
             }
