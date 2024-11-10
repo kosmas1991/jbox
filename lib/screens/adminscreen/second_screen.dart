@@ -6,6 +6,8 @@ import 'package:jbox/main.dart';
 import 'package:jbox/screens/displayscreen/displayscreen.dart';
 import 'dart:html';
 
+import 'package:jbox/screens/requestscreen/requestscreen.dart';
+
 class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,17 @@ class SecondScreen extends StatelessWidget {
                   );
                 },
                 buttonText: 'Οθόνη προβολής',
+              ),
+              MyGlobalButton(
+                fun: () {
+                  GoRouter.of(context).goNamed(
+                    RequestScreen.routeName,
+                    queryParameters: {
+                      'terminal': auth.currentUser?.displayName
+                    },
+                  );
+                },
+                buttonText: 'Test request page button',
               ),
             ],
           ),
