@@ -19,6 +19,7 @@ var firestore = FirebaseFirestore.instance;
 
 //! flutter run -d chrome --web-renderer html
 //! flutter build web --web-renderer html --release
+//! flutter run -d chrome --web-renderer html --web-browser-flag "--disable-web-security"
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
