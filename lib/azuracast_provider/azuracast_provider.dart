@@ -6,6 +6,7 @@ import 'package:jbox/models/nowplaying.dart';
 import 'package:http/http.dart' as http;
 import 'package:jbox/models/requestlist.dart';
 import 'package:jbox/models/requestsongresponse.dart';
+import 'package:dio/dio.dart' as dioClient;
 
 class AzuracastProvider {
   static Future<NowPlaying> getNowPlaying({required String url}) async {
@@ -77,19 +78,49 @@ class AzuracastProvider {
     // https://radioserver.gr/api/station/1/request/7262ca68bf9f0f7590750ea3
 
     'url->${url}  requestID->${requestID} stationID-> ${stationID}'
-        .printError();
-    var urlData = '$url/api/station/$stationID/request/$requestID';
-    Response response = Response.bytes([152, 8585], 200); //dump data
+        .printWhite();
+    var urlData =
+        'https://corsproxy.io/?$url/api/station/$stationID/request/$requestID';
+    var client = dioClient.Dio();
+    client.interceptors.add(dioClient.InterceptorsWrapper(
+      onRequest: (options, handler) {
+        'interceptor request data -> onSendProgress = ${options.onSendProgress}, path = ${options.path}, options.receiveDataWhenStatusError = ${options.receiveDataWhenStatusError},'
+            .printWarning();
+        handler.next(options);
+      },
+      onResponse: (response, handler) {
+        'interceptor resp data -> data = ${response.data}, statusMessage = ${response.statusMessage}, statusCode = ${response.statusCode},'
+            .printGreen();
+        handler.next(response);
+      },
+      onError: (error, handler) {
+        'interceptor captured resp -> error.response?.data = ${error.response?.data}, error.response?.statusCode = ${error.response?.statusCode}, error.response?.statusMessage = ${error.response?.statusMessage},'
+            .printError();
+        handler.next(error);
+      },
+    ));
+    var responseData;
     try {
-      response = await http.post(Uri.parse(urlData));
-      if (response.statusCode == 500) {
-        'hi'.printWarning();
-      }
-    } catch (e) {
-      'erorrrrr and resp ->${response.bodyBytes}'.printGreen();
+      responseData = await client.post(
+        data: {},
+        urlData,
+        options: dioClient.Options(
+            followRedirects: false,
+            // will not throw errors
+            validateStatus: (status) => true,
+            headers: {
+              'accept': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+              'Access-Control-Allow-Headers': '*',
+            }),
+      );
+    } on dioClient.DioException catch (error) {
+      'zzzzzzz error happened so ever zzzzzzz-> ${error.message}'.printError();
     }
 
-    var requestSongResponse = requestSongResponseFromJson(response.body);
+    var requestSongResponse =
+        requestSongResponseFromJson(responseData.toString());
     return requestSongResponse;
   }
 }

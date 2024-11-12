@@ -7,9 +7,9 @@ SnackBar mySnackBar(String message,
     {Severity severity = Severity.success, Duration? duration}) {
   return SnackBar(
     behavior: SnackBarBehavior.floating,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(999.0),
-    ),
+    // shape: RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.circular(999.0),
+    // ),
     width: 250,
     elevation: 0,
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
