@@ -19,14 +19,14 @@ class AzuracastProvider {
     return nowPlaying;
   }
 
-  // Stream that returns getNowPlaying() data every 10 seconds
+  //todo Stream that returns getNowPlaying() data every 100 seconds
   static Stream<NowPlaying> nowPlayingStream({required String url}) async* {
     try {
       // Emit the first NowPlaying data immediately
       yield await getNowPlaying(url: url);
-
+      'error here'.printError();
       // Then, emit data every 10 seconds
-      await for (final _ in Stream.periodic(Duration(seconds: 10))) {
+      await for (final _ in Stream.periodic(Duration(seconds: 100))) {
         yield await getNowPlaying(url: url);
       }
     } catch (e) {
@@ -58,8 +58,8 @@ class AzuracastProvider {
       // Emit the first NowPlaying data immediately
       yield await getRequestList(url: url, stationID: stationID);
 
-      // Then, emit data every 10 seconds
-      await for (final _ in Stream.periodic(Duration(seconds: 10))) {
+      //todo Then, emit data every 100 seconds
+      await for (final _ in Stream.periodic(Duration(seconds: 100))) {
         yield await getRequestList(url: url, stationID: stationID);
       }
     } catch (e) {

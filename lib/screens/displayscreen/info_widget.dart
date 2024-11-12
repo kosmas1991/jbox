@@ -19,6 +19,7 @@ class InfoWidget extends StatefulWidget {
 class _InfoWidgetState extends State<InfoWidget> {
   AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
   late Future<NowPlaying> nowPlaying;
+  Stream<NowPlaying> dataStream = Stream.empty();
   @override
   void initState() {
     nowPlaying =
@@ -32,14 +33,20 @@ class _InfoWidgetState extends State<InfoWidget> {
         // showNotification: true,
       ),
     );
+    dataStream =
+        AzuracastProvider.nowPlayingStream(url: widget.data['azuracastURL'])
+            .asBroadcastStream();
     super.initState();
   }
 
   @override
+  void dispose() {
+    dataStream = Stream.empty();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var dataStream =
-        AzuracastProvider.nowPlayingStream(url: widget.data['azuracastURL'])
-            .asBroadcastStream();
     double width = MediaQuery.of(context).size.width;
     'width is ${width}'.printWhite();
     return LayoutBuilder(
