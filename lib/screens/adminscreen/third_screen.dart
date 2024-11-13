@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:jbox/extensions/debug_print_extension.dart';
 import 'package:jbox/firestore/firestore_functions.dart';
 import 'package:jbox/global%20widgets/myglobalbutton.dart';
 import 'package:jbox/main.dart';

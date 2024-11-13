@@ -1,7 +1,6 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:jbox/azuracast_provider/azuracast_provider.dart';
-import 'package:jbox/extensions/debug_print_extension.dart';
 import 'package:jbox/models/nowplaying.dart';
 
 class InfoWidget extends StatefulWidget {
@@ -47,12 +46,12 @@ class _InfoWidgetState extends State<InfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     // 'width is ${width}'.printWhite();
     return LayoutBuilder(
       //! maxWidth is used to achieve responsiveness, every widget should use it as size parameter if possible
       builder: (context, constraints) {
-        var maxHeight = constraints.maxHeight;
+        // var maxHeight = constraints.maxHeight;
         var maxWidth = constraints.maxWidth;
         // 'maxwidth is ${maxWidth} and maxheight is ${maxHeight}'.printError();
         var screenTextStyle =
