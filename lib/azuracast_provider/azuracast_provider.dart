@@ -14,19 +14,17 @@ class AzuracastProvider {
       throw Exception(
           'Αδυναμία επικοινωνίας με τον server. Ελέγξτε την παράμετρο azuracast URL');
     }
-
     NowPlaying nowPlaying = nowPlayingFromJson(response.body).first;
     return nowPlaying;
   }
 
-  //todo Stream that returns getNowPlaying() data every 100 seconds
+  //Stream that returns getNowPlaying() data every 10 seconds
   static Stream<NowPlaying> nowPlayingStream({required String url}) async* {
     try {
       // Emit the first NowPlaying data immediately
       yield await getNowPlaying(url: url);
-      'error here'.printError();
       // Then, emit data every 10 seconds
-      await for (final _ in Stream.periodic(Duration(seconds: 100))) {
+      await for (final _ in Stream.periodic(Duration(seconds: 10))) {
         yield await getNowPlaying(url: url);
       }
     } catch (e) {
@@ -58,8 +56,8 @@ class AzuracastProvider {
       // Emit the first NowPlaying data immediately
       yield await getRequestList(url: url, stationID: stationID);
 
-      //todo Then, emit data every 100 seconds
-      await for (final _ in Stream.periodic(Duration(seconds: 100))) {
+      //Then, emit data every 10 seconds
+      await for (final _ in Stream.periodic(Duration(seconds: 10))) {
         yield await getRequestList(url: url, stationID: stationID);
       }
     } catch (e) {

@@ -131,7 +131,7 @@ class _InfoWidgetState extends State<InfoWidget> {
                           );
                         } else if (snapshot.hasError) {
                           return Text(
-                            'Συνέβη κάποιο σφάλμα! Ελέγξτε την παράμετρο azuracast URL',
+                            '${snapshot.error.toString()}',
                             style: screenTextStyle,
                           );
                         } else {

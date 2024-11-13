@@ -167,12 +167,13 @@ class NowPlayingClass {
       };
 }
 
-enum Playlist { ALL, ALTERNATIVE, DEFAULT }
+enum Playlist { ALL, ALTERNATIVE, DEFAULT, EMPTY }
 
 final playlistValues = EnumValues({
   "All": Playlist.ALL,
   "Alternative": Playlist.ALTERNATIVE,
-  "default": Playlist.DEFAULT
+  "default": Playlist.DEFAULT,
+  "": Playlist.EMPTY
 });
 
 class Song {
