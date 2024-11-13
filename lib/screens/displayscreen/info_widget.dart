@@ -48,13 +48,13 @@ class _InfoWidgetState extends State<InfoWidget> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    'width is ${width}'.printWhite();
+    // 'width is ${width}'.printWhite();
     return LayoutBuilder(
       //! maxWidth is used to achieve responsiveness, every widget should use it as size parameter if possible
       builder: (context, constraints) {
         var maxHeight = constraints.maxHeight;
         var maxWidth = constraints.maxWidth;
-        'maxwidth is ${maxWidth} and maxheight is ${maxHeight}'.printError();
+        // 'maxwidth is ${maxWidth} and maxheight is ${maxHeight}'.printError();
         var screenTextStyle =
             TextStyle(fontSize: maxWidth / 40, color: Colors.white);
         return Column(

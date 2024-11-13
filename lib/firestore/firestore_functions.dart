@@ -18,7 +18,7 @@ class FirestoreProvider {
 
     // Add data to Firestore in 'users' collection with UID as the document ID
     await firestore.collection('users').doc(user.uid).set(userData);
-    'added user to firestore with data ${userData}'.printWhite();
+    // 'added user to firestore with data ${userData}'.printWhite();
 
     //also set a default background image at parameters collection  //also add the display name at parameters collection
     // TODO create an initial map with all the parameters like azuracast URL etc

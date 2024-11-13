@@ -58,8 +58,8 @@ class LoginScreen extends StatelessWidget {
               ),
               AuthStateChangeAction<UserCreated>(
                 (context, state) {
-                  'a new user is created with UID: ${auth.currentUser?.uid}'
-                      .printGreen();
+                  // 'a new user is created with UID: ${auth.currentUser?.uid}'
+                  //     .printGreen();
                   FirestoreProvider.addNewUserToFirestore(auth.currentUser!);
                 },
               )

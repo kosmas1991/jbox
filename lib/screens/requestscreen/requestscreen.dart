@@ -79,8 +79,8 @@ class RequestScreen extends StatelessWidget {
                                                                   .data![index]
                                                                   .requestId ??
                                                               '');
-                                              'resp message text ${utf8.decode(response.message!.codeUnits)}'
-                                                  .printWarning();
+                                              // 'resp message text ${utf8.decode(response.message!.codeUnits)}'
+                                              //     .printWarning();
                                               MyApp.snackbarKey.currentState!
                                                   .showSnackBar(mySnackBar(
                                                       utf8.decode(response

@@ -18,8 +18,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEvent>((event, emit) {
       if (event.user != null) {
         'user signed in'.printWarning();
-        'User has the below data stored at firebase\ndisplay name: ${event.user!.displayName}\nphoto url: ${event.user!.photoURL}\nphone: ${event.user!.phoneNumber}\nemail: ${event.user!.email} -> verified? ${event.user!.emailVerified}'
-            .printWarning();
+        // 'User has the below data stored at firebase\ndisplay name: ${event.user!.displayName}\nphoto url: ${event.user!.photoURL}\nphone: ${event.user!.phoneNumber}\nemail: ${event.user!.email} -> verified? ${event.user!.emailVerified}'
+        //     .printWarning();
 
         emit(state.copyWith(loggedIn: true, user: event.user));
       } else {

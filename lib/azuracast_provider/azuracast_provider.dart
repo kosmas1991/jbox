@@ -71,14 +71,10 @@ class AzuracastProvider {
       required String requestID,
       int stationID = 1}) async {
     // https://radioserver.gr/api/station/1/request/7262ca68bf9f0f7590750ea3
-
-    'url->${url}  requestID->${requestID} stationID-> ${stationID}'
-        .printWhite();
     var urlData =
         'https://corsproxy.io/?$url/api/station/$stationID/request/$requestID';
-
+    //! no need try catch block here as the error 500 fits the model and we need it
     var responseData = await http.post(Uri.parse(urlData));
-
     var requestSongResponse = requestSongResponseFromJson(responseData.body);
     return requestSongResponse;
   }

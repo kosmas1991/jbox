@@ -36,8 +36,8 @@ class ThirdScreen extends StatelessWidget {
                     }
 
                     if (snapshot.hasError) {
-                      'nothing important -> ${snapshot.error.toString()}'
-                          .printError();
+                      // 'nothing important -> ${snapshot.error.toString()}'
+                      //     .printError();
                     }
 
                     return Image.network(
