@@ -21,7 +21,6 @@ class FirestoreProvider {
     // 'added user to firestore with data ${userData}'.printWhite();
 
     //also set a default background image at parameters collection  //also add the display name at parameters collection
-    // TODO create an initial map with all the parameters like azuracast URL etc
     await setParametersToFirestore(
         collectionName: 'parameters',
         user: user,
@@ -32,6 +31,7 @@ class FirestoreProvider {
           'azuracastURL': '',
           'showBackgroundImageAtFirstScreen': 'true',
           'infoTextField': ''
+          //here I add all the initial parameters like azuracast URL etc
         });
   }
 

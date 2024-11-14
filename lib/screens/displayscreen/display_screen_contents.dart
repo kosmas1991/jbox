@@ -18,28 +18,49 @@ class DisplayScreenContents extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         var maxHeight = constraints.maxHeight;
+        var maxWidth = constraints.maxWidth;
         return Stack(
           children: [
             Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Flexible(
-                    flex: 2,
-                    //! INFO widget
-                    child: InfoWidget(
-                      data: data,
+              child: maxWidth < 400
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          //! INFO widget
+                          child: InfoWidget(
+                            data: data,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          //! QR widget
+                          child: QRWidget(
+                            data: data,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          //! INFO widget
+                          child: InfoWidget(
+                            data: data,
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          //! QR widget
+                          child: QRWidget(
+                            data: data,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    //! QR widget
-                    child: QRWidget(
-                      data: data,
-                    ),
-                  ),
-                ],
-              ),
             ),
             //! scroll bottom bar
             StreamBuilder<String>(
