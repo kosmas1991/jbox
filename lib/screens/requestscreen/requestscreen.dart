@@ -184,14 +184,14 @@ class RequestScreen extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
-                      Flexible(
-                        flex: 2,
-                        child: Container(
-                            width: 400,
-                            height: double.infinity,
-                            color: Colors.blueAccent,
-                            child: Text('Request a song that not exists')),
-                      ),
+                      // Flexible(
+                      //   flex: 2,
+                      //   child: Container(
+                      //       width: 400,
+                      //       height: double.infinity,
+                      //       color: Colors.blueAccent,
+                      //       child: Text('Request a song that not exists')),
+                      // ),
                     ],
                   ),
                 ),

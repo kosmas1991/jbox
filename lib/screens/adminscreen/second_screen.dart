@@ -59,6 +59,9 @@ class SecondScreen extends StatelessWidget {
                 },
                 buttonText: 'Οθόνη προβολής',
               ),
+              SizedBox(
+                height: 10,
+              ),
               MyGlobalButton(
                 fun: () {
                   GoRouter.of(context).goNamed(
@@ -68,7 +71,7 @@ class SecondScreen extends StatelessWidget {
                     },
                   );
                 },
-                buttonText: 'Test request page button',
+                buttonText: 'Οθόνη αιτημάτων',
               ),
             ],
           ),
