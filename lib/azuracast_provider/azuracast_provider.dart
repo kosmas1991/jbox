@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:jbox/extensions/printextensions.dart';
 import 'package:jbox/models/nowplaying.dart';
 import 'package:http/http.dart' as http;
 import 'package:jbox/models/requestlist.dart';
@@ -70,10 +71,13 @@ class AzuracastProvider {
       required String requestID,
       int stationID = 1}) async {
     // https://radioserver.gr/api/station/1/request/7262ca68bf9f0f7590750ea3
+    //TODO select a good (paid) proxy
     var urlData =
-        'https://corsproxy.io/?$url/api/station/$stationID/request/$requestID';
+        'https://api.allorigins.win/raw?url=$url/api/station/$stationID/request/$requestID';
+    'url data:${urlData}'.printError();
     //! no need try catch block here as the error 500 fits the model and we need it
     var responseData = await http.post(Uri.parse(urlData));
+    'resp data:${responseData.body}'.printWarning();
     var requestSongResponse = requestSongResponseFromJson(responseData.body);
     return requestSongResponse;
   }
