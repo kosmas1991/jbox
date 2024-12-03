@@ -122,7 +122,7 @@ class NowPlayingClass {
   int? shId;
   int? playedAt;
   int? duration;
-  Playlist? playlist;
+
   String? streamer;
   bool? isRequest;
   Song? song;
@@ -133,7 +133,6 @@ class NowPlayingClass {
     this.shId,
     this.playedAt,
     this.duration,
-    this.playlist,
     this.streamer,
     this.isRequest,
     this.song,
@@ -146,7 +145,6 @@ class NowPlayingClass {
         shId: json["sh_id"],
         playedAt: json["played_at"],
         duration: json["duration"],
-        playlist: playlistValues.map[json["playlist"]]!,
         streamer: json["streamer"],
         isRequest: json["is_request"],
         song: json["song"] == null ? null : Song.fromJson(json["song"]),
@@ -158,7 +156,6 @@ class NowPlayingClass {
         "sh_id": shId,
         "played_at": playedAt,
         "duration": duration,
-        "playlist": playlistValues.reverse[playlist],
         "streamer": streamer,
         "is_request": isRequest,
         "song": song?.toJson(),
@@ -167,15 +164,6 @@ class NowPlayingClass {
       };
 }
 
-enum Playlist { ALL, ALTERNATIVE, DEFAULT, EMPTY }
-
-final playlistValues = EnumValues({
-  "All": Playlist.ALL,
-  "Alternative": Playlist.ALTERNATIVE,
-  "default": Playlist.DEFAULT,
-  "": Playlist.EMPTY
-});
-
 class Song {
   String? id;
   String? art;
@@ -183,8 +171,7 @@ class Song {
   String? text;
   String? artist;
   String? title;
-  String? album;
-  String? genre;
+
   String? isrc;
   String? lyrics;
 
@@ -195,8 +182,6 @@ class Song {
     this.text,
     this.artist,
     this.title,
-    this.album,
-    this.genre,
     this.isrc,
     this.lyrics,
   });
@@ -210,8 +195,6 @@ class Song {
         text: json["text"],
         artist: json["artist"],
         title: json["title"],
-        album: json["album"],
-        genre: json["genre"],
         isrc: json["isrc"],
         lyrics: json["lyrics"],
       );
@@ -225,18 +208,24 @@ class Song {
         "text": text,
         "artist": artist,
         "title": title,
-        "album": album,
-        "genre": genre,
         "isrc": isrc,
         "lyrics": lyrics,
       };
 }
 
+enum Album { BAPTIZED, EMPTY }
+
+final albumValues = EnumValues({"Baptized": Album.BAPTIZED, "": Album.EMPTY});
+
+enum Genre { EMPTY, ROCK }
+
+final genreValues = EnumValues({"": Genre.EMPTY, "Rock": Genre.ROCK});
+
 class PlayingNext {
   int? cuedAt;
   int? playedAt;
   int? duration;
-  Playlist? playlist;
+
   bool? isRequest;
   Song? song;
 
@@ -244,7 +233,6 @@ class PlayingNext {
     this.cuedAt,
     this.playedAt,
     this.duration,
-    this.playlist,
     this.isRequest,
     this.song,
   });
@@ -253,7 +241,6 @@ class PlayingNext {
         cuedAt: json["cued_at"],
         playedAt: json["played_at"],
         duration: json["duration"],
-        playlist: playlistValues.map[json["playlist"]]!,
         isRequest: json["is_request"],
         song: json["song"] == null ? null : Song.fromJson(json["song"]),
       );
@@ -262,7 +249,6 @@ class PlayingNext {
         "cued_at": cuedAt,
         "played_at": playedAt,
         "duration": duration,
-        "playlist": playlistValues.reverse[playlist],
         "is_request": isRequest,
         "song": song?.toJson(),
       };
