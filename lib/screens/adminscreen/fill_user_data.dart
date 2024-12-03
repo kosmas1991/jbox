@@ -67,7 +67,7 @@ class _FillUserDataState extends State<FillUserData> {
                                 fun: () async {
                                   await auth.currentUser?.updatePhotoURL(
                                       //! uses profile_picture.jpg from firebase storage (avatar picture)
-                                      'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/profile_picture.jpg?alt=media&token=955a8aff-830b-4f9f-a2fd-4dfab7d42c92');
+                                      'https://firebasestorage.googleapis.com/v0/b/jboxserver.appspot.com/o/profile_picture.jpg?alt=media&token=8092f60f-9204-47b0-b1bb-c48815c5922e');
                                   await FirestoreProvider.modifyUserToFirestore(
                                       auth.currentUser!);
                                 }),
