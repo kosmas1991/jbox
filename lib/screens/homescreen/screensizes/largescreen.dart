@@ -29,16 +29,16 @@ class LargeScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(18.0),
-                        child: Text(
-                          HomeScreenConstants.menu1Text,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
+                      // const Padding(
+                      //   padding: EdgeInsets.all(18.0),
+                      //   child: Text(
+                      //     HomeScreenConstants.menu1Text,
+                      //     style: TextStyle(
+                      //       fontSize: 13,
+                      //       fontWeight: FontWeight.w500,
+                      //     ),
+                      //   ),
+                      // ),
                       // checks if user logged in in order to show photURL or Είσοδος
                       auth.currentUser?.photoURL != null
                           ? InkWell(
@@ -115,7 +115,9 @@ class LargeScreen extends StatelessWidget {
                       ),
                       ElevatedButton(
                         style: HomeScreenConstants.buttonStyleBig,
-                        onPressed: () {},
+                        onPressed: () {
+                          GoRouter.of(context).goNamed(LoginScreen.routeName);
+                        },
                         child: const Text(
                           HomeScreenConstants.buttonText,
                           style: TextStyle(

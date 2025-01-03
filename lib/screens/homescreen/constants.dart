@@ -6,7 +6,7 @@ class HomeScreenConstants {
   static const menu1Text = 'Τιμές';
   static const logInText = 'Είσοδος';
   static const imagePath = 'assets/images/image.jpg';
-  static const buttonText = 'Μάθε περισσότερα';
+  static const buttonText = 'Δημιουργία λογαριασμού';
   static final richTextSection = RichText(
     text: const TextSpan(
       children: <TextSpan>[

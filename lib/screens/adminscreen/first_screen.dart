@@ -10,8 +10,6 @@ import 'package:jbox/screens/adminscreen/widgets/azuracast_link_field.dart';
 import 'package:jbox/screens/adminscreen/widgets/display_screen_info_text_field.dart';
 import 'package:jbox/screens/adminscreen/widgets/username_field.dart';
 
-//!TODO add a wallpaper upload image
-
 class FirstScreen extends StatefulWidget {
   @override
   State<FirstScreen> createState() => _FirstScreenState();
@@ -28,6 +26,13 @@ class _FirstScreenState extends State<FirstScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Σύνδεσμος azuracast'),
+              SizedBox(
+                height: 10,
+              ),
+              SelectableText(
+                'demo URL: https://radioserver.gr',
+                style: TextStyle(color: Colors.redAccent),
+              ),
               SizedBox(
                 height: 10,
               ),
